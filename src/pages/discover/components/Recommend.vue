@@ -62,8 +62,8 @@ export default {
   },
   methods: {
     _recommedinit () {
-      let recWidth = 100 // 图片宽度
-      let margin = 5
+      let recWidth = 90 // 图片宽度
+      let margin = 1.5
       let width = (recWidth + margin) * this.recommendList.length - margin
       this.$refs.container.style.width = width + 'px' // 给ul设置了宽度
       this.$nextTick(() => {
@@ -113,22 +113,22 @@ export default {
                 position relative
                 display: inline-block
                 width 100px
-                margin 0 5px
+                margin 0 1.5px
                 .content-bg
-                    width 100px
-                    height 100px
+                    width 90px
+                    height 90px
                     img
                         width 100%
                         border-radius 5px
                 .content-text
                     white-space normal
                     font-size 12px
-                    width 100px
+                    width 90px
                     ellipsis-row(2)
                 .content-num
                     position absolute
-                    right 3px
-                    top 0
+                    right 15px
+                    top -4px
                     color #fff
                     span
                         font-size 8px

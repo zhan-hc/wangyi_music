@@ -3,6 +3,7 @@
     <discover-swiper></discover-swiper>
     <discover-icon></discover-icon>
     <discover-recommend></discover-recommend>
+    <discover-song></discover-song>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import DiscoverSwiper from './components/Swiper'
 import DiscoverIcon from './components/Icon'
 import DiscoverRecommend from './components/Recommend'
+import DiscoverSong from './components/Song'
 export default {
   name: 'Discover',
   data () {
@@ -20,10 +22,13 @@ export default {
   components: {
     DiscoverSwiper,
     DiscoverIcon,
-    DiscoverRecommend
+    DiscoverRecommend,
+    DiscoverSong
   }
 }
 </script>
 
 <style lang="stylus" scoped >
+.discover
+  overflow hidden
 </style>
