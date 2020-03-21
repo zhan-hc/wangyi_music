@@ -10,6 +10,13 @@ import './assets/iconfont/iconfont.css'
 import CommonHeader from './pages/common/Header'
 export default {
   name: 'App',
+  data () {
+    return {
+      status: null
+    }
+  },
+  methods: {
+  },
   components: {
     CommonHeader
   }

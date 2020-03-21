@@ -4,6 +4,7 @@
     <discover-icon></discover-icon>
     <discover-recommend></discover-recommend>
     <discover-song></discover-song>
+        <category v-show="CategoryStatu"></category>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import DiscoverSwiper from './components/Swiper'
 import DiscoverIcon from './components/Icon'
 import DiscoverRecommend from './components/Recommend'
 import DiscoverSong from './components/Song'
+import Category from '../category/Category'
 export default {
   name: 'Discover',
   data () {
@@ -19,11 +21,19 @@ export default {
 
     }
   },
+  mounted () {
+  },
   components: {
     DiscoverSwiper,
     DiscoverIcon,
     DiscoverRecommend,
-    DiscoverSong
+    DiscoverSong,
+    Category
+  },
+  computed: {
+    CategoryStatu () {
+      return this.$store.state.CategoryStatus
+    }
   }
 }
 </script>

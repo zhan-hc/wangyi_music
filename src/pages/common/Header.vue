@@ -1,7 +1,7 @@
 <template>
   <div class="header">
       <div class="header-left">
-        <span class="iconfont icon-category"></span>
+        <span class="iconfont icon-category" @click="ShowCategory"></span>
       </div>
       <div class="header-main">
         <router-link tag="span" to="/" active-class="active" exact>我的</router-link>
@@ -10,7 +10,7 @@
         <router-link tag="span" to="/video" active-class="active">视频</router-link>
       </div>
       <div class="header-right">
-        <span class="iconfont icon-search1"></span>
+        <span class="iconfont icon-sousuo"></span>
       </div>
 
   </div>
@@ -21,7 +21,12 @@ export default {
   name: 'CommonHeader',
   data () {
     return {
-
+      whether: false
+    }
+  },
+  methods: {
+    ShowCategory () {
+      this.$store.commit('showCategory')
     }
   }
 }
@@ -31,10 +36,6 @@ export default {
 .active
   color #000
   font-weight 700
-  // &.fade-enter-active,&.fade-leave-active
-  //   transition: opacity .5s
-  // &.fade-enter,&.fade-leave-to
-  //   opacity: 0
 .header
     display flex
     width 100%
@@ -54,4 +55,5 @@ export default {
     .header-right
         flex 0 0 36px
         text-align center
+        font-weight 600
 </style>

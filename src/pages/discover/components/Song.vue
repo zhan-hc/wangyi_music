@@ -92,7 +92,6 @@ export default {
   },
   mounted () {
     this._recommedinit()
-    console.log(this.clientWidth)
   },
   methods: {
     _recommedinit () {
