@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    CategoryStatus: false
+    CategoryStatus: false,
+    AudioStatus: false
   },
   mutations: {
     showCategory (state) {
@@ -13,6 +14,9 @@ export default new Vuex.Store({
     },
     hideCategory (state) {
       state.CategoryStatus = false
+    },
+    changeAudioStatus (state) {
+      state.AudioStatus = !state.AudioStatus
     }
   }
 })
