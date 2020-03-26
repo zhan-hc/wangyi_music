@@ -1,7 +1,7 @@
 <template>
   <div class="header">
       <div class="header-left">
-        <span class="iconfont icon-category" @click="ShowCategory"></span>
+        <span class="iconfont icon-MENU" @click="ShowCategory"></span>
       </div>
       <div class="header-main">
         <router-link tag="span" to="/" active-class="active" exact>我的</router-link>
@@ -45,6 +45,7 @@ export default {
     .header-left
         flex 0 0 36px
         text-align center
+        font-weight bold
     .header-main
         display flex
         flex 1

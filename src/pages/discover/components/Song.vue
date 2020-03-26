@@ -10,9 +10,9 @@
               <div class="content-song" :style="{'width': clientWidth + 'px'}" v-for="(page, index) in pages" :key="index">
                   <div class="list" v-for="list in page" :key="list.id">
                       <div class="list-img"><img :src="list.imgUrl"></div>
-                      <div class="name">{{list.name}}<span class="author">{{list.author}}</span></div>
+                      <div class="name">{{list.name}}<span class="author">  ─ &nbsp;{{list.author}}</span></div>
                       <div class="desc" :class="{'desc-active': !list.icon}"><span class="iconfont" :class="list.icon"></span>{{list.desc}}</div>
-                      <div class="icon"><span class="iconfont icon-bofang1"></span></div>
+                      <div class="icon"><span class="iconfont icon-bofang1" @click="updateSong(list)"></span></div>
                   </div>
               </div>
           </div>
@@ -31,47 +31,59 @@ export default {
           id: '0001',
           imgUrl: 'http://p2.music.126.net/6TNYBV2rezZLiwsGYBgmPw==/123145302311773.jpg',
           name: '幻听',
-          author: '  -  许嵩',
+          author: '许嵩',
           icon: 'icon-sq',
-          desc: '心酸纵有千百种 沉默不语最难过'
+          desc: '心酸纵有千百种 沉默不语最难过',
+          mp3: 'http://music.163.com/song/media/outer/url?id=167655.mp3',
+          background: 'linear-gradient(#0d080a,#8d0744,#311c25)'
         },
         {
           id: '0002',
           imgUrl: 'http://p2.music.126.net/qX7ixB5ZT2wVJwgACuf_nA==/109951164623078367.jpg',
           name: '悬日',
-          author: '  -  田馥甄',
-          desc: '云音乐飙升榜16名'
+          author: '田馥甄',
+          desc: '云音乐飙升榜16名',
+          mp3: 'http://music.163.com/song/media/outer/url?id=1416387774.mp3',
+          background: 'linear-gradient(#686667, #C4B0A9, #746663)'
         },
         {
           id: '0003',
           imgUrl: 'http://p1.music.126.net/a0jjOlv-61XLSoIiMjjGgA==/109951164566000641.jpg',
           name: '老友记',
-          author: '  -  李荣浩',
+          author: '李荣浩',
           icon: 'icon-dujia1',
-          desc: '纵使相逢应不识 尘满面 鬓如霜'
+          desc: '纵使相逢应不识 尘满面 鬓如霜',
+          mp3: 'http://music.163.com/song/media/outer/url?id=1410490187.mp3',
+          background: 'linear-gradient(#171B1E, #354650, #171B24)'
         },
         {
           id: '0004',
           imgUrl: 'http://p1.music.126.net/P3c_pg1RI5KXw7DFxGEh0w==/109951163784021165.jpg',
           name: 'Parties',
-          author: '  -  Jake Miller',
-          desc: '超72%人播放'
+          author: 'Jake Miller',
+          desc: '超72%人播放',
+          mp3: 'http://music.163.com/song/media/outer/url?id=484365611.mp3',
+          background: 'linear-gradient(#171B1E, #354650, #171B24)'
         },
         {
           id: '0005',
           imgUrl: 'http://p1.music.126.net/gQ_ga1r9r7YpHG3j0zr9wg==/109951163305404713.jpg',
           name: 'Speecjless',
-          author: '  -  Dan + Shay',
+          author: 'Dan + Shay',
           icon: 'null',
-          desc: '你是如此让我着迷 还把它埋在心里'
+          desc: '你是如此让我着迷 还把它埋在心里',
+          mp3: 'http://music.163.com/song/media/outer/url?id=560032384.mp3',
+          background: 'linear-gradient(#753536, #E76C6F, #7B393B)'
         },
         {
           id: '0006',
           imgUrl: 'http://p2.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg',
           name: '异类',
-          author: '  -  华晨宇',
+          author: '华晨宇',
           icon: 'icon-dujia1',
-          desc: '长得像小白兔 唱的歌像大灰狼'
+          desc: '长得像小白兔 唱的歌像大灰狼',
+          mp3: 'http://music.163.com/song/media/outer/url?id=33190545.mp3',
+          background: 'linear-gradient(#240e10, #CD031B, #240e10)'
         }
       ],
       clientWidth: document.body.clientWidth * 0.95
@@ -110,6 +122,10 @@ export default {
           this.recScroll.refresh()
         }
       })
+    },
+    updateSong (list) {
+      this.$store.commit('ChangeSong', list)
+      this.$store.commit('PlayAudio')
     }
   }
 }

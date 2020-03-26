@@ -3,6 +3,7 @@
     <common-header></common-header>
     <category v-show="CategoryStatu"></category>
     <common-aplayer></common-aplayer>
+    <common-lyrics v-show="LyricsStatu"></common-lyrics>
     <router-view/>
   </div>
 </template>
@@ -11,7 +12,8 @@
 import './assets/iconfont/iconfont.css'
 import CommonHeader from './pages/common/Header'
 import Category from './pages/category/Category'
-import commonAplayer from './pages/common/Aplayer'
+import CommonAplayer from './pages/common/Aplayer'
+import CommonLyrics from './pages/common/Lyrics'
 export default {
   name: 'App',
   data () {
@@ -24,12 +26,16 @@ export default {
   computed: {
     CategoryStatu () {
       return this.$store.state.CategoryStatus
+    },
+    LyricsStatu () {
+      return this.$store.state.LyricsStatus
     }
   },
   components: {
     CommonHeader,
     Category,
-    commonAplayer
+    CommonAplayer,
+    CommonLyrics
   }
 }
 </script>

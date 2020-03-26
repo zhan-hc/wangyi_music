@@ -4,6 +4,7 @@ import Home from '../pages/home/Home.vue'
 import Discover from '../pages/discover/Discover.vue'
 import YunCun from '../pages/yuncun/YunCun.vue'
 import Vedio from '../pages/vedio/Vedio.vue'
+import Lyrics from '../pages/common/Lyrics.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/vedio',
       name: 'Vedio',
       component: Vedio
+    },
+    {
+      path: '/lyrics',
+      name: 'Lyrics',
+      component: Lyrics
     }
   ]
 })

@@ -1,20 +1,20 @@
 <template>
-  <div class="aplayer">
+  <router-link tag="div" class="aplayer" to="/lyrics">
     <div class="aplayer-img">
-      <img src="http://p2.music.126.net/6TNYBV2rezZLiwsGYBgmPw==/123145302311773.jpg"/>
+      <img :src="SongList.imgUrl"/>
     </div>
     <div class="content">
-      <div class="title">幻听</div>
-      <div class="author">许嵩</div>
+      <div class="title">{{SongList.name}}</div>
+      <div class="author">{{SongList.author}}</div>
     </div>
     <div class="play">
-      <span class="iconfont" :class="{'icon-zanting1':a_play,'icon-bofang2':a_pause}" @click="play()"></span>
+      <span class="iconfont" :class="AudioStatu" @click.stop="play"></span>
     </div>
     <div class="about">
       <span class="iconfont icon-caidan"></span>
     </div>
-    <audio ref="audio" src="http://music.163.com/song/media/outer/url?id=167655.mp3"></audio>
-  </div>
+    <audio ref="audio" :src="SongList.mp3"></audio>
+  </router-link>
 </template>
 
 <script type="text/javascript">
@@ -27,20 +27,69 @@ export default {
       a_pause: false
     }
   },
-  methods: {
-    play () {
+  computed: {
+    AudioStatu () {
       if (this.$store.state.AudioStatus) {
-        this.$store.commit('changeAudioStatus')
-
-        this.a_play = true
-        this.a_pause = false
-        this.$refs.audio.pause()
+        return 'icon-bofang2'
       } else {
-        this.$store.commit('changeAudioStatus')
-        this.a_play = false
-        this.a_pause = true
+        return 'icon-zanting1'
+      }
+    },
+    SongList () {
+      return this.$store.state.SongList
+    }
+  },
+  mounted () {
+    this.$refs.audio.oncanplay = () => { // 音乐准备播放前执行
+      this.$store.commit('SongTime', this.transTime(this.$refs.audio.duration))
+      if (this.$store.state.AudioStatus) {
         this.$refs.audio.play()
       }
+    }
+    this.$refs.audio.ontimeupdate = () => { // 当媒介改变其播放位置时执行
+      this.$store.commit('UpdateSongNow', this.transTime(this.$refs.audio.currentTime))
+      this.$store.commit('UpdateSongX', (((this.$refs.audio.currentTime / this.$refs.audio.duration) * this.$store.state.SongWidth) + 57) + 'px')
+      this.$store.commit('UpdateSongRate', ((this.$refs.audio.currentTime / this.$refs.audio.duration * this.$store.state.SongWidth)).toFixed(2) + 'px')
+    }
+  },
+  watch: {
+    '$store.state.AudioStatus' () { // 监听播放的全局的播放状态
+      if (this.$store.state.AudioStatus) {
+        this.$refs.audio.play()
+      } else {
+        this.$refs.audio.pause()
+      }
+    },
+    '$store.state.SpotMove' () { // 当移动进度条时触发
+      this.$refs.audio.currentTime = (((this.$store.state.Song_X.slice(0, -2) - 57) / this.$store.state.SongWidth) * this.$refs.audio.duration).toFixed(6)
+    }
+  },
+  methods: {
+    play () {
+      this.$store.commit('changeAudioStatus')
+    },
+    transTime (times) { // 将音乐播播放格式变为 00:00
+      var t
+      if (times > -1) {
+        var hour = Math.floor(times / 3600) * 60
+        var min = Math.floor(times / 60) % 60
+        var sec = times % 60
+        if (hour > 0) {
+          t = (hour + min).toString()
+        } else {
+          if (min < 10) {
+            t = '0' + min
+          } else {
+            t = min
+          }
+        }
+        t += ':'
+        if (sec < 10) {
+          t += '0'
+        }
+        t += Math.floor(sec)
+      }
+      return t
     }
   },
   components: {
