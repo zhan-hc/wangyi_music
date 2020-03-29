@@ -1,5 +1,5 @@
 <template>
-  <div class="lyrics" :style="{'background': SongList.background}">
+  <div class="lyrics" :style="{'background': SongList.background ? SongList.background : 'linear-gradient(#171B1E, #354650, #171B24)'}">
       <div class="wrapper">
           <div class="header">
               <div class="back"><span class="iconfont icon-fanhuipt" @click="HideLyrics"></span></div>

@@ -8,6 +8,12 @@ export default {
   changeAudioStatus (state) { // 改变播放器的状态
     state.AudioStatus = !state.AudioStatus
   },
+  showMenu (state) { // 菜单显示
+    state.MenuStatus = true
+  },
+  hideMenu (state) { // 菜单隐藏
+    state.MenuStatus = false
+  },
   PlayAudio (state) { // 播放
     state.AudioStatus = true
   },

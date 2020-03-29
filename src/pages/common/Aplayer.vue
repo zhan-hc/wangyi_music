@@ -11,7 +11,7 @@
       <span class="iconfont" :class="AudioStatu" @click.stop="play"></span>
     </div>
     <div class="about">
-      <span class="iconfont icon-caidan"></span>
+      <span class="iconfont icon-caidan" @click.stop="ShowMenu"></span>
     </div>
     <audio ref="audio" :src="SongList.mp3"></audio>
   </router-link>
@@ -90,6 +90,9 @@ export default {
         t += Math.floor(sec)
       }
       return t
+    },
+    ShowMenu () {
+      this.$store.commit('showMenu')
     }
   },
   components: {
