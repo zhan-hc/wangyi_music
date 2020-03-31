@@ -10,6 +10,25 @@
               <div class="share"><span class="iconfont icon-fenxiangpt"></span></div>
           </div>
           <div class="content">
+              <div class="stylus">
+                <div class="box">
+                  <div class="stylus_1" :style="{'transform':ChangeStylus}">
+                    <div class="stylus_2">
+                      <div class="stylus_3"></div>
+                      <div class="stylus_4">
+                        <div class="stylus_5">
+                          <div class="stylus_6"></div>
+                          <div class="stylus_7">
+                            <div class="stylus_8">
+                              <div class="stylus_9"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="level_1" :style="{'animation-play-state':Animation}">
                   <div class="level_2">
                       <div class="level_3">
@@ -101,6 +120,13 @@ export default {
       } else {
         return 'paused'
       }
+    },
+    ChangeStylus () {
+      if (this.$store.state.AudioStatus) {
+        return 'rotate(-18deg)'
+      } else {
+        return 'rotate(-50deg)'
+      }
     }
   },
   components: {
@@ -165,6 +191,85 @@ transform: rotate(360deg);
             margin auto
             width 100%
             text-align center
+            .stylus
+              .box
+                position absolute
+                width 100%
+                display flex
+                justify-content center
+                .stylus_1
+                  position relative
+                  border-radius 50%
+                  width 25px
+                  height 25px
+                  background rgba(0, 0, 0, 0.2)
+                  z-index: 1
+                  transform:rotate(-18deg);
+                  transition: all 2s ease-in-out;
+                  .stylus_2
+                    width 76%
+                    height 76%
+                    border-radius 50%
+                    margin 12%
+                    background-color #ffffff
+                    display flex
+                    justify-content center
+                    align-items center
+                    z-index 2
+                    .stylus_3
+                      width 40%
+                      height 40%
+                      border-radius 50%
+                      background-color #e5e5e5
+                    .stylus_4
+                      width 25%
+                      height 200%
+                      position absolute
+                      z-index -3
+                      top 20%
+                      border-radius 50px
+                      background linear-gradient(to right, #b3b3b1, #d3d3d3, #b3b3b1)
+                      // border 1px solid #fff
+                      .stylus_5
+                        width:100%
+                        height:56%
+                        position:relative
+                        bottom:-88%
+                        left: 6px
+                        background: linear-gradient(to right, #b3b3b1, #d3d3d3, #b3b3b1)
+                        transform:rotate(-25deg)
+                        // border 1px solid #fff
+                        .stylus_6
+                          width 30%
+                          height 20%
+                          background-color #3e3e3e
+                          position absolute
+                          bottom 0
+                          left 35%
+                          border-radius 10px 10px 0 0
+                        .stylus_7
+                          width 135%
+                          height 60%
+                          border-radius 5px 5px 0 0
+                          position absolute
+                          bottom -58%
+                          left -15%
+                          background linear-gradient(#b3b3b1, #d3d3d3)
+                          .stylus_8
+                            width 150%
+                            height 75%
+                            position relative
+                            bottom -98%
+                            left -2px
+                            border-radius 2px
+                            background: linear-gradient(to right, #b3b3b1, #d3d3d3, #b3b3b1)
+                            .stylus_9
+                              width: 8%;
+                              height: 50%;
+                              background-color: #b1b1b1;
+                              position: absolute;
+                              top: 20%;
+                              left 5px
             .level_1
                 width 70%
                 height 0
