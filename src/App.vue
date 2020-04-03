@@ -26,9 +26,9 @@ export default {
     CategoryStatu () {
       return this.$store.state.CategoryStatus
     },
-    LyricsStatu () {
-      return this.$store.state.LyricsStatus
-    },
+    // LyricsStatu () {
+    //   return this.$store.state.LyricsStatus
+    // },
     MenuStatu () {
       return this.$store.state.MenuStatus
     }

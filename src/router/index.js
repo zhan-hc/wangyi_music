@@ -12,13 +12,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/discover',
       name: 'Discover',
       component: Discover
+    },
+    {
+      path: '/home',
+      name: '',
+      component: Home
     },
     {
       path: '/yuncun',

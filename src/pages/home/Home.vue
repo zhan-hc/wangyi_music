@@ -1,9 +1,11 @@
 <template>
   <div class="home">
+    <home-header></home-header>
   </div>
 </template>
 
 <script type="text/javascript">
+import HomeHeader from './components/Header'
 export default {
   name: 'Home',
   data () {
@@ -12,6 +14,7 @@ export default {
     }
   },
   components: {
+    HomeHeader
   }
 }
 </script>

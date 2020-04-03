@@ -4,15 +4,14 @@
         <span class="iconfont icon-MENU" @click="ShowCategory"></span>
       </div>
       <div class="header-main">
-        <router-link tag="span" to="/" active-class="active" exact>我的</router-link>
-        <router-link tag="span" to="/discover" active-class="active">发现</router-link>
+        <router-link tag="span" to="/home" active-class="active">我的</router-link>
+        <router-link tag="span" to="/" active-class="active"  exact>发现</router-link>
         <router-link tag="span" to="/yuncun" active-class="active">云村</router-link>
         <router-link tag="span" to="/video" active-class="active">视频</router-link>
       </div>
       <div class="header-right">
         <span class="iconfont icon-sousuo"></span>
       </div>
-
   </div>
 </template>
 
@@ -21,23 +20,29 @@ export default {
   name: 'CommonHeader',
   data () {
     return {
-      whether: false
+      homeStatus: false
     }
+  },
+  watch: {
   },
   methods: {
     ShowCategory () {
       this.$store.commit('showCategory')
     }
+  },
+  computed: {
   }
 }
 </script>
 
 <style lang="stylus" scoped >
-.active
+.active {
   color #000
-  font-weight 700
+  font-weight bold
+}
 .header
     display flex
+    // background #000
     width 100%
     height 36px
     line-height 36px
