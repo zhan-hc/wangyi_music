@@ -67,13 +67,13 @@ export default {
         },
         {
           id: '0005',
-          imgUrl: 'http://p1.music.126.net/gQ_ga1r9r7YpHG3j0zr9wg==/109951163305404713.jpg',
-          name: 'Speecjless',
-          author: 'Dan + Shay',
+          imgUrl: 'http://p1.music.126.net/sITJku5m96z6KF8c9P7fiA==/808141046459327.jpg',
+          name: 'Never Change',
+          author: 'Chase Coy',
           icon: 'null',
-          desc: '你是如此让我着迷 还把它埋在心里',
-          mp3: 'http://music.163.com/song/media/outer/url?id=560032384.mp3',
-          background: 'linear-gradient(#753536, #E76C6F, #7B393B)'
+          desc: '阳光下 宁静 怀念曾经的自己',
+          mp3: 'http://music.163.com/song/media/outer/url?id=1141813.mp3',
+          background: 'linear-gradient(#486F90, #7CD0FF, #7F8A90)'
         },
         {
           id: '0006',

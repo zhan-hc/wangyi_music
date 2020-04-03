@@ -40,5 +40,8 @@ export default {
   },
   ChangeSong (state, song) { // 改变歌曲
     state.SongList = song
+    try {
+      localStorage.SongList = JSON.stringify(song)
+    } catch (e) {}
   }
 }

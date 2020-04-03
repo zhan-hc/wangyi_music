@@ -35,4 +35,5 @@ export default {
 <style lang="stylus" scoped >
 .discover
   overflow hidden
+  margin-bottom 50px
 </style>
