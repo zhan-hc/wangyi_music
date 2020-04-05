@@ -19,7 +19,7 @@
 
 <script type="text/javascript">
 export default {
-  name: 'Home-Header',
+  name: 'HomeHeader',
   data () {
     return {
       iconList: [
@@ -57,7 +57,7 @@ export default {
 <style lang="stylus" scoped >
 .header
     position relative
-    padding 15px
+    padding 15px 15px 30px 15px
     background rgba(0,0,0,0.8)
     color #fff
     .avatar-wrapper
@@ -100,6 +100,7 @@ export default {
             .iconfont
                 font-size 18px
             .name
+                margin-top 5px
                 font-size 12px
 
 </style>

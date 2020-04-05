@@ -63,7 +63,7 @@ export default {
   methods: {
     _recommedinit () {
       let recWidth = 90 // 图片宽度
-      let margin = 1.5
+      let margin = 13
       let width = (recWidth + margin) * this.recommendList.length - margin
       this.$refs.container.style.width = width + 'px' // 给ul设置了宽度
       this.$nextTick(() => {
@@ -113,7 +113,7 @@ export default {
                 position relative
                 display: inline-block
                 width 100px
-                margin 0 1.5px
+                margin-right 3px
                 .content-bg
                     width 90px
                     height 90px
