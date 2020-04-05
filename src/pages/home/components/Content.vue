@@ -6,13 +6,13 @@
       </div>
       <div class="content-wrapper" ref="WrapperScroll">
           <div class="content" ref="ContentScroll">
-              <div class="list-wrapper" v-for="list in musicList" :key="list.id" :style="{'background-image': 'url( ' + list.imgUrl + ')'}">
+              <router-link tag="div" :to="Page_favorite(list.id)" class="list-wrapper" v-for="list in musicList" :key="list.id" :style="{'background-image': 'url( ' + list.imgUrl + ')'}">
                 <div class="list">
                     <div class="icon"><span class="iconfont" :class="list.icon"></span></div>
                     <div class="title">{{list.title}}</div>
                     <div class="desc">{{list.desc}}</div>
                 </div>
-              </div>
+              </router-link>
           </div>
       </div>
       <div class="header-wrapper">
@@ -137,7 +137,16 @@ export default {
           this.recScroll.refresh()
         }
       })
+    },
+    Page_favorite (id) {
+      if (id === '001') {
+        return '/favorite'
+      } else {
+        return '/home'
+      }
     }
+  },
+  computed: {
   }
 }
 </script>

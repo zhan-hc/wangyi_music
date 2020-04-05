@@ -208,7 +208,6 @@ export default {
             flex 0 0 80%
             overflow hidden
             width 80%
-            // height 568px
             .container
                 position relative
                 background rgb(97,97,97)

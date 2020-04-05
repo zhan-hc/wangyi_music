@@ -147,7 +147,7 @@ transform: rotate(360deg);
     position fixed
     left 0
     top 0
-    z-index 101
+    z-index 106
     // background-image linear-gradient(#0d080a,#8d0744,#311c25)
     width 100%
     height 100%

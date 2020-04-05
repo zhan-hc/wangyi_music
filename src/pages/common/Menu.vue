@@ -140,7 +140,7 @@ export default {
           id: '010',
           name: '国王与乞丐',
           author: '华晨宇/杨宗纬',
-          imgUrl: '32835565',
+          imgUrl: 'http://p2.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg?param=130y130',
           mp3: 'http://music.163.com/song/media/outer/url?id=32835565.mp3'
         },
         {

@@ -106,7 +106,7 @@ export default {
     position fixed
     bottom 0px
     left 0px
-    z-index 99
+    z-index 105
     width 100%
     height 50px
     background #ffffff
@@ -137,7 +137,6 @@ export default {
         font-size 32px
       .icon-bofang2
         font-size 32px
-
     .about
       position absolute
       right 10px
