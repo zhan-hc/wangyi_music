@@ -53,12 +53,14 @@
             </div>
             <div class="song_menu-wrapper">
                 <div class="container">
-                    <div class="header">
+                    <div class="header" >
                         <span class="iconfont icon-bofang1"></span>
                         <div class="desc">播放全部<span class="num">(共31首)</span></div>
                     </div>
                     <div class="song-wrapper">
-                        <div @click="updateSong(list)" class="songlist" v-for="(list, index) in songList" :key="list.id">
+                        <div @click.stop="updateSong(list)" @touchstart="SongOver(index)" @touchend="SongOut(index)"
+                         class="songlist" v-for="(list, index) in songList" :key="list.id"
+                           :class="{'change_bg': list.isHv}">
                             <div class="id">{{index + 1}}</div>
                             <div class="content">
                                 <div class="name">{{list.name}}</div>
@@ -91,80 +93,92 @@ export default {
           name: '天真有邪',
           author: '林宥嘉',
           imgUrl: 'http://p1.music.126.net/oVJmUJ1bPb_9eBOFCKLclQ==/109951163167730852.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=417833029.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=417833029.mp3',
+          isHv: 0
         },
         {
           id: '002',
           name: '演员',
           author: '薛之谦',
           imgUrl: 'http://p2.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=32507038.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=32507038.mp3',
+          isHv: 0
         },
         {
           id: '003',
           name: '小酒窝',
           author: '林俊杰/蔡卓妍',
           imgUrl: 'http://p1.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=108468.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=108468.mp3',
+          isHv: 0
         },
         {
           id: '004',
           name: '倒数',
           author: 'G.E.M.邓紫棋',
           imgUrl: 'http://p1.music.126.net/tXCIFsVDK6IKcQ9YWxwOEg==/109951163523944497.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1299550532.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1299550532.mp3',
+          isHv: 0
         },
         {
           id: '005',
           name: '你想要的',
           author: '颜人中',
           imgUrl: 'http://p1.music.126.net/OzDIi7gUmsPkRUtF-slgYA==/109951164844070975.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1434309927.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1434309927.mp3',
+          isHv: 0
         },
         {
           id: '006',
           name: 'comethru',
           author: 'Jeremy Zucker',
           imgUrl: 'http://p1.music.126.net/5T16HrYHad3Zaqh5EAfUxQ==/109951163623808339.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1307996767.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1307996767.mp3',
+          isHv: 0
         },
         {
           id: '007',
           name: '重演',
           author: '王巨星',
           imgUrl: 'http://p1.music.126.net/nqw7mcUKGY-I4aKTtC9BZA==/109951164519394300.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1406809993.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1406809993.mp3',
+          isHv: 0
         },
         {
           id: '008',
           name: '与火星的孩子对话',
           author: '华晨宇',
           imgUrl: 'http://p2.music.126.net/AFmJAcW7jFamQBNF68iKgw==/109951164452907718.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1399533630.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1399533630.mp3',
+          isHv: 0
         },
         {
           id: '009',
           name: '孤身',
           author: '徐炳龙',
           imgUrl: 'http://p1.music.126.net/yVmtE5RFcJ1fhv-ivuyuRw==/109951164075300143.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1365393542.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1365393542.mp3',
+          isHv: 0
         },
         {
           id: '010',
           name: '国王与乞丐',
           author: '华晨宇/杨宗纬',
           imgUrl: 'http://p2.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg?param=130y130',
-          mp3: 'http://music.163.com/song/media/outer/url?id=32835565.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=32835565.mp3',
+          isHv: 0
         },
         {
           id: '011',
           name: '这一生关于你的风景',
           author: '枯木逢春',
           imgUrl: 'http://p1.music.126.net/415A5Xt3bUegx4vyiY8dNQ==/109951164821961505.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1356350562.mp3'
+          mp3: 'http://music.163.com/song/media/outer/url?id=1356350562.mp3',
+          isHv: 0
         }
       ],
-      title: '歌单'
+      title: '歌单',
+      active: ''
     }
   },
   mounted () {
@@ -180,7 +194,6 @@ export default {
             probeType: 3,
             bounce: false
           })
-          console.log(document.documentElement.clientHeight * 0.35)
           this.songScroll.on('scroll', (pos) => { // 判断滑动距离事件
             if (Math.abs(Math.round(pos.y)) > 70) {
               this.title = '我喜欢的音乐'
@@ -196,12 +209,21 @@ export default {
     updateSong (list) {
       this.$store.commit('ChangeSong', list)
       this.$store.commit('PlayAudio')
+    },
+    SongOver (i) {
+      this.songList[i].isHv = 1
+    },
+    SongOut (i) {
+      this.songList[i].isHv = 0
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped >
+.change_bg{
+  background #ccc}
+
 .favorite-wrapper
     position fixed
     top 0
