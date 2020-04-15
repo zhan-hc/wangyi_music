@@ -23,5 +23,7 @@ export default {
   SongRate: '0px', // 已播放的区域长度
   SongWidth: '', // 进度条的长素
   SpotMove: '',
-  SongList: defaultSong // 播放器中音乐
+  SongList: defaultSong, // 播放器中音乐
+  Empty: false, // 清空搜索历史纪录的的弹出框状态
+  History: ['枯木逢春', '国王与乞丐', '你想要的', '颜人中', '夏天的风']
 }

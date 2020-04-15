@@ -405,5 +405,4 @@ export default {
                                 position absolute
                                 right 5px
                                 top 15px
-
 </style>

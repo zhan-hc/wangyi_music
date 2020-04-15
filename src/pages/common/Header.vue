@@ -10,7 +10,7 @@
         <router-link tag="span" to="/video" active-class="active">视频</router-link>
       </div>
       <div class="header-right">
-        <span class="iconfont icon-sousuo"></span>
+        <router-link tag="span" to="/search" class="iconfont icon-sousuo"></router-link>
       </div>
   </div>
 </template>

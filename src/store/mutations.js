@@ -43,5 +43,16 @@ export default {
     try {
       localStorage.SongList = JSON.stringify(song)
     } catch (e) {}
+  },
+  AddHistory () {
+  },
+  hideHistory (state) { // 隐藏历史纪录的的弹出框
+    state.Empty = false
+  },
+  showHistory (state) { // 显示历史纪录的的弹出框
+    state.Empty = true
+  },
+  EmptyHistory (state) {
+    state.History = []
   }
 }

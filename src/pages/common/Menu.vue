@@ -203,7 +203,7 @@ export default {
   left 0
   width 100%
   height 100%
-  z-index 102
+  z-index 106
   margin 0
   padding 20px
   background rgba(0,0,0,0.5)
