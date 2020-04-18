@@ -13,6 +13,28 @@ try {
     defaultSong = JSON.parse(localStorage.SongList)
   }
 } catch (e) {}
+//
+let dataList = {
+}
+try {
+  if (localStorage.palylist) {
+    dataList = JSON.parse(localStorage.palylist)
+  }
+} catch (e) {}
+//
+let user = {
+}
+try {
+  if (localStorage.userlist) {
+    user = JSON.parse(localStorage.userlist)
+  }
+} catch (e) {}
+//
+let grade = 0
+try {
+  if (localStorage.level) {
+  }
+} catch (e) {}
 export default {
   CategoryStatus: false, // 设置菜单状态
   AudioStatus: false, // 播放器的状态
@@ -25,5 +47,8 @@ export default {
   SpotMove: '',
   SongList: defaultSong, // 播放器中音乐
   Empty: false, // 清空搜索历史纪录的的弹出框状态
-  History: ['枯木逢春', '国王与乞丐', '你想要的', '颜人中', '夏天的风']
+  History: ['枯木逢春', '国王与乞丐', '你想要的', '颜人中', '夏天的风'],
+  playlist: dataList,
+  userlist: user,
+  level: grade
 }

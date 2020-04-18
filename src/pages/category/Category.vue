@@ -20,8 +20,8 @@
               </div>
               <div class="content-wrapper">
                   <div class="user">
-                      <div class="avatar"><img src="http://p1.music.126.net/BUFZLieG5a6E3ZVpkHP6fA==/109951163402069754.jpg"></div>
-                      <div class="name">等你回眸170530</div>
+                      <div class="avatar"><img :src="user.avatarUrl"></div>
+                      <div class="name">{{user.nickname}}</div>
                       <div class="sign"><span class="iconfont icon-jinbi"><span class="text">签到</span></span> </div>
                   </div>
                   <div class="icon-wrapper">
@@ -163,6 +163,9 @@ export default {
     this._initScroll()
   },
   computed: {
+    user () {
+      return this.$store.state.userlist
+    }
   },
   methods: {
     _initScroll () {

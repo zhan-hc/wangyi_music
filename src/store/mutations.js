@@ -54,5 +54,23 @@ export default {
   },
   EmptyHistory (state) {
     state.History = []
+  },
+  ChangePlayList (state, list) { // 改变歌曲信息
+    state.playlist = list
+    try {
+      localStorage.playlist = JSON.stringify(list)
+    } catch (e) {}
+  },
+  ChangeUserList (state, list) { // 改变用户信息
+    state.userlist = list
+    try {
+      localStorage.userlist = JSON.stringify(list)
+    } catch (e) {}
+  },
+  ChangeUserLevel (state, i) { // 改变用户信息
+    state.level = i
+    try {
+      localStorage.level = i
+    } catch (e) {}
   }
 }

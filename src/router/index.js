@@ -7,6 +7,12 @@ import Vedio from '../pages/vedio/Vedio.vue'
 import Lyrics from '../pages/common/Lyrics.vue'
 import Search from '../pages/common/Search.vue'
 import Favorite from '../pages/home/components/Favorite.vue'
+import Login from '../pages/login/Login.vue'
+import PhoneLogin from '../pages/login/components/PhoneLogin.vue'
+import CheckPhone from '../pages/login/components/CheckPhone.vue'
+import PhoneRegister from '../pages/login/components/PhoneRegister.vue'
+import TelLogin from '../pages/login/components/TelLogin.vue'
+import Rename from '../pages/login/components/Rename.vue'
 
 Vue.use(Router)
 
@@ -46,6 +52,36 @@ export default new Router({
       path: '/search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/phonelogin',
+      name: 'PhoneLogin',
+      component: PhoneLogin
+    },
+    {
+      path: '/checkphone',
+      name: 'CheckPhone',
+      component: CheckPhone
+    },
+    {
+      path: '/phoneRegister',
+      name: 'PhoneRegister',
+      component: PhoneRegister
+    },
+    {
+      path: '/telLogin',
+      name: 'TelLogin',
+      component: TelLogin
+    },
+    {
+      path: '/rename',
+      name: 'Rename',
+      component: Rename
     }
   ]
 })

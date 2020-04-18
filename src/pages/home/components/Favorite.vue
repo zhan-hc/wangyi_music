@@ -27,8 +27,8 @@
                     <div class="info-wrapper">
                         <div class="title">我喜欢的音乐</div>
                         <div class="object">
-                            <img src="http://p1.music.126.net/BUFZLieG5a6E3ZVpkHP6fA==/109951163402069754.jpg" width="30" height="30">
-                            <div class="name">等你回眸170530 <span class="iconfont icon-arrow-right"></span></div>
+                            <img :src="user.avatarUrl" width="30" height="30">
+                            <div class="name">{{user.nickname}}<span class="iconfont icon-arrow-right"></span></div>
                         </div>
                     </div>
                 </div>
@@ -215,6 +215,11 @@ export default {
     },
     SongOut (i) {
       this.songList[i].isHv = 0
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.userlist
     }
   }
 }

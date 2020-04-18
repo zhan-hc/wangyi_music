@@ -1,10 +1,10 @@
 <template>
   <div class="header">
       <div class="avatar-wrapper">
-          <div class="avatar"><img src="http://p1.music.126.net/BUFZLieG5a6E3ZVpkHP6fA==/109951163402069754.jpg"></div>
+          <div class="avatar"><img :src="user.avatarUrl"></div>
           <div class="info">
-              <div class="name">等你回眸170530</div>
-          <div class="grade">Lv.6</div>
+              <div class="name">{{user.nickname}}</div>
+          <div class="grade">Lv.{{level}}</div>
           </div>
           <div class="vip">开通黑胶VIP ></div>
       </div>
@@ -49,6 +49,14 @@ export default {
           name: '关注新歌'
         }
       ]
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.userlist
+    },
+    level () {
+      return this.$store.state.level
     }
   }
 }
