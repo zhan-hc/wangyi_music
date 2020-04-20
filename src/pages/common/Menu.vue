@@ -10,8 +10,8 @@
             <div class="list-wrapper" ref="HistoryListScroll">
               <ul class="nowlist">
                   <li class="item" v-for="list in songList" :key="list.id"  @click.stop="updateSong(list)">
-                      <div class="name">{{list.name}}</div>
-                      <div class="author"> - {{list.author}}</div>
+                      <div class="name">{{list.song.name}}</div>
+                      <div class="author"> - {{list.song.ar[0].name}}</div>
                       <span class="iconfont icon-chuyidong"></span>
                   </li>
               </ul>
@@ -25,15 +25,15 @@
             <div class="list-wrapper" ref="LastListScroll">
               <ul class="nowlist">
                   <li class="item" v-for="list in songList" :key="list.id" @click.stop="updateSong(list)">
-                      <div class="name">{{list.name}}</div>
-                      <div class="author"> - {{list.author}}</div>
+                      <div class="name">{{list.song.name}}</div>
+                      <div class="author"> - {{list.song.ar[0].name}}</div>
                       <span class="iconfont icon-chuyidong"></span>
                   </li>
               </ul>
             </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="title">当前播放<span class="num">(12)</span></div>
+            <div class="title">当前播放<span class="num">({{this.recently_num}})</span></div>
             <div class="header-wrapper">
               <div class="audio-way"><span class="iconfont icon--lbxh"></span>列表循环</div>
               <div class="collect"><span class="iconfont icon-shoucangjia"></span>收藏全部</div>
@@ -41,9 +41,9 @@
             </div>
             <div class="list-wrapper" ref="NowListScroll">
               <ul class="nowlist">
-                  <li class="item" v-for="list in songList" :key="list.id" @click.stop="updateSong(list)">
-                      <div class="name">{{list.name}}</div>
-                      <div class="author"> - {{list.author}}</div>
+                  <li class="item" v-for="list in songList" :key="list.id" @click.stop="updateSong(list.song)">
+                      <div class="name">{{list.song.name}}</div>
+                      <div class="author"> - {{list.song.ar[0].name}}</div>
                       <span class="iconfont icon-chuyidong"></span>
                   </li>
               </ul>
@@ -57,6 +57,7 @@
 
 <script type="text/javascript">
 import BScroll from 'better-scroll'
+import axios from 'axios'
 export default {
   name: 'CommonMenu',
   data () {
@@ -72,89 +73,13 @@ export default {
         observeParents: true,
         observer: true
       },
-      songList: [
-        {
-          id: '001',
-          name: '天真有邪',
-          author: '林宥嘉',
-          imgUrl: 'http://p1.music.126.net/oVJmUJ1bPb_9eBOFCKLclQ==/109951163167730852.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=417833029.mp3'
-        },
-        {
-          id: '002',
-          name: '演员',
-          author: '薛之谦',
-          imgUrl: 'http://p2.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=32507038.mp3'
-        },
-        {
-          id: '003',
-          name: '小酒窝',
-          author: '林俊杰/蔡卓妍',
-          imgUrl: 'http://p1.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=108468.mp3'
-        },
-        {
-          id: '004',
-          name: '倒数',
-          author: 'G.E.M.邓紫棋',
-          imgUrl: 'http://p1.music.126.net/tXCIFsVDK6IKcQ9YWxwOEg==/109951163523944497.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1299550532.mp3'
-        },
-        {
-          id: '005',
-          name: '你想要的',
-          author: '颜人中',
-          imgUrl: 'http://p1.music.126.net/OzDIi7gUmsPkRUtF-slgYA==/109951164844070975.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1434309927.mp3'
-        },
-        {
-          id: '006',
-          name: 'comethru',
-          author: 'Jeremy Zucker',
-          imgUrl: 'http://p1.music.126.net/5T16HrYHad3Zaqh5EAfUxQ==/109951163623808339.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1307996767.mp3'
-        },
-        {
-          id: '007',
-          name: '重演',
-          author: '王巨星',
-          imgUrl: 'http://p1.music.126.net/nqw7mcUKGY-I4aKTtC9BZA==/109951164519394300.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1406809993.mp3'
-        },
-        {
-          id: '008',
-          name: '与火星的孩子对话',
-          author: '华晨宇',
-          imgUrl: 'http://p2.music.126.net/AFmJAcW7jFamQBNF68iKgw==/109951164452907718.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1399533630.mp3'
-        },
-        {
-          id: '009',
-          name: '孤身',
-          author: '徐炳龙',
-          imgUrl: 'http://p1.music.126.net/yVmtE5RFcJ1fhv-ivuyuRw==/109951164075300143.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1365393542.mp3'
-        },
-        {
-          id: '010',
-          name: '国王与乞丐',
-          author: '华晨宇/杨宗纬',
-          imgUrl: 'http://p2.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg?param=130y130',
-          mp3: 'http://music.163.com/song/media/outer/url?id=32835565.mp3'
-        },
-        {
-          id: '011',
-          name: '这一生关于你的风景',
-          author: '枯木逢春',
-          imgUrl: 'http://p1.music.126.net/415A5Xt3bUegx4vyiY8dNQ==/109951164821961505.jpg',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1356350562.mp3'
-        }
-      ]
+      songList: [],
+      recently_num: 0
     }
   },
   mounted () {
     this._ListInit()
+    this.GetRecently()
   },
   methods: {
     _ListInit () {
@@ -163,6 +88,7 @@ export default {
           this.nowScroll = new BScroll(this.$refs.NowListScroll, {
             click: true
           })
+          // this.$refs.NowListScroll.style.height = document.body.clientHeight * 0.5 + 'px'
         } else {
           this.nowScroll.refresh()
         }
@@ -170,6 +96,7 @@ export default {
           this.lastScroll = new BScroll(this.$refs.LastListScroll, {
             click: true
           })
+          // this.$refs.LastListScroll.style.height = document.body.clientHeight * 0.5 + 'px'
         } else {
           this.lastScroll.refresh()
         }
@@ -177,6 +104,7 @@ export default {
           this.historyScroll = new BScroll(this.$refs.HistoryListScroll, {
             click: true
           })
+          // this.$refs.HistoryListScroll.style.height = document.body.clientHeight * 0.5 + 'px'
         } else {
           this.historyScroll.refresh()
         }
@@ -188,6 +116,14 @@ export default {
     updateSong (list) {
       this.$store.commit('ChangeSong', list)
       this.$store.commit('PlayAudio')
+    },
+    GetRecently () {
+      let id = this.$store.state.userlist.userId
+      axios.get('http://localhost:3000/user/record?uid=' + id + '&type=1').then(res => res.data).then(data => {
+        console.log(data)
+        this.songList = data.weekData
+        this.recently_num = this.songList.length
+      })
     }
   }
 }

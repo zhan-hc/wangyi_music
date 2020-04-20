@@ -22,13 +22,13 @@
             <div class="hotlist-wrapper">
               <div class="title">热搜榜</div>
               <div class="list-wrapper">
-                <div class="list" v-for="(list,index) in hotList" :key="list.id">
-                  <div class="order">{{index+1}}</div>
+                <div class="list" v-for="(list,index) in HotList" :key="list.id">
+                  <div class="order" :style="{'color' : hotcolor(index)}">{{index+1}}</div>
                   <div class="content">
-                    <div class="title">{{list.name}}<span class="iconfont" :class="list.icon"></span></div>
-                    <div class="desc">{{list.desc}}</div>
+                    <div class="title">{{list.searchWord}}<img v-show="list.iconType" :src="list.iconUrl"></div>
+                    <div class="desc">{{list.content}}</div>
                   </div>
-                  <div class="num">{{list.num}}</div>
+                  <div class="num">{{list.score}}</div>
                 </div>
               </div>
             </div>
@@ -39,117 +39,26 @@
 
 <script type="text/javascript">
 import BScroll from 'better-scroll'
+import axios from 'axios'
 export default {
   name: 'CommonSearch',
   data () {
     return {
-      hotList: [
-        {
-          id: '001',
-          name: '微微',
-          desc: '微微 去喜欢 这微微 小世界',
-          num: '2573061'
-        },
-        {
-          id: '002',
-          name: '夏天的风',
-          desc: '单曲循环无数次 回忆杀',
-          num: '2421497',
-          icon: 'icon-HOT'
-        },
-        {
-          id: '003',
-          name: '歌手当打之年',
-          desc: '华晨宇新歌首发夺冠',
-          num: '2113299',
-          icon: 'icon-HOT'
-        },
-        {
-          id: '004',
-          name: '华晨宇',
-          desc: '花花的歌声里 有少年的孤傲',
-          num: '1559392',
-          icon: 'icon-HOT'
-        },
-        {
-          id: '005',
-          name: '飘向北方',
-          desc: '梦想在哪里，他们就飘到哪里',
-          num: '1515802'
-        },
-        {
-          id: '006',
-          name: '国王与乞丐',
-          desc: '一起感受华晨宇的绝美吟唱！',
-          num: '1112238'
-        },
-        {
-          id: '007',
-          name: 'Relationship',
-          desc: '说唱是疯狂的 也是真诚的',
-          num: '1104167'
-        },
-        {
-          id: '008',
-          name: 'Zyn Zyn',
-          desc: '上班困了？ 来首歌醒脑！',
-          num: '1082242'
-        },
-        {
-          id: '009',
-          name: '吹梦到西洲',
-          desc: '南风知我意，吹梦到西洲。',
-          num: '973245',
-          icon: 'icon-HOT'
-        },
-        {
-          id: '010',
-          name: 'dat $tick',
-          desc: '进来感受7哥的低音炮吧！',
-          num: '942912'
-        },
-        {
-          id: '011',
-          name: '你',
-          desc: '你，是这个世界上最短的诗句',
-          num: '847716'
-        },
-        {
-          id: '012',
-          name: '林俊杰',
-          desc: '一千年以后，还是学不会爱你',
-          num: '776279'
-        },
-        {
-          id: '013',
-          name: '冬眠',
-          desc: '外面好冷 可以一起冬眠吗',
-          num: '765586'
-        },
-        {
-          id: '014',
-          name: '死也爱你',
-          desc: '噪音也太深情了！',
-          num: '761594',
-          icon: 'icon-shang'
-        },
-        {
-          id: '015',
-          name: '你是人间四月天',
-          desc: '你是人间四月天，笑声点亮四面神',
-          num: '7396666'
-        }
-      ]
+      HotList: []
     }
   },
   mounted () {
     this._Historyinit()
     this._HotInit()
+    this.Gethotlist()
   },
   computed: {
     HistoryRecords () {
       return this.$store.state.History
     }
+    // HotList () {
+    //   return this.$store.state.hotlist
+    // }
   },
   methods: {
     BackPage () {
@@ -191,6 +100,18 @@ export default {
     },
     showHistory () {
       this.$store.commit('showHistory')
+    },
+    hotcolor (index) {
+      if (index < 3) {
+        return 'red'
+      }
+    },
+    Gethotlist () {
+      this.$nextTick(() => {
+        axios.get('http://localhost:3000/search/hot/detail').then(res => res.data).then(data => {
+          this.HotList = data.data
+        })
+      })
     }
   },
   components: {
@@ -281,17 +202,20 @@ export default {
               .order
                 display inline-block
                 width 30px
-                height 50px
-                line-height 50px
+                height 40px
+                line-height 40px
                 vertical-align top
+                // border 2px solid #000
                 text-align left
               .content
                 flex 1
                 display inline-block
                 .title
                   font-size 14px
-                  .iconfont
-                    color red
+                  img
+                    margin-left 5px
+                    width 14px
+                    height 100%
                 .desc
                   margin-top 3px
                   font-size 12px

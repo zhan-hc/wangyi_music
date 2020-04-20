@@ -13,15 +13,15 @@ try {
     defaultSong = JSON.parse(localStorage.SongList)
   }
 } catch (e) {}
-//
+// 自己的歌单
 let dataList = {
 }
 try {
-  if (localStorage.palylist) {
-    dataList = JSON.parse(localStorage.palylist)
+  if (localStorage.playlist) {
+    dataList = JSON.parse(localStorage.playlist)
   }
 } catch (e) {}
-//
+// 用户数据
 let user = {
 }
 try {
@@ -29,10 +29,11 @@ try {
     user = JSON.parse(localStorage.userlist)
   }
 } catch (e) {}
-//
+// 用户等级
 let grade = 0
 try {
   if (localStorage.level) {
+    grade = JSON.parse(localStorage.level)
   }
 } catch (e) {}
 export default {
@@ -50,5 +51,6 @@ export default {
   History: ['枯木逢春', '国王与乞丐', '你想要的', '颜人中', '夏天的风'],
   playlist: dataList,
   userlist: user,
-  level: grade
+  level: grade,
+  hotlist: ''
 }

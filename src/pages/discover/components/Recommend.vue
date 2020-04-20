@@ -1,16 +1,16 @@
 <template>
   <div class="recommend">
       <div class="header-wrapper">
-          <div class="header-top">推荐歌单</div>
+          <div class="header-top" @click="NumFilter(15420)">推荐歌单</div>
           <div class="header-left">为你精挑细选</div>
           <div class="header-right">查看更多</div>
       </div>
       <div class="content-wrapper" ref="ContentScroll">
           <div class="content-container" ref="container">
             <div class="content" v-for="list in recommendList" :key="list.id">
-                <div class="content-bg"><img :src="list.imgUrl"></div>
-                <div class="content-text">{{list.text}}</div>
-                <div class="content-num"><span class="iconfont icon-pause"> {{list.Num}}</span></div>
+                <div class="content-bg"><img :src="list.picUrl"></div>
+                <div class="content-text">{{list.name}}</div>
+                <div class="content-num"><span class="iconfont icon-pause"> {{NumFilter(list.playCount)}}</span></div>
             </div>
           </div>
       </div>
@@ -19,52 +19,23 @@
 
 <script type="text/javascript">
 import BScroll from 'better-scroll'
+import axios from 'axios'
 export default {
   name: 'DiscoverRecommend',
   data () {
     return {
-      recommendList: [
-        {
-          id: '0001',
-          imgUrl: 'http://p4.music.126.net/OUFpNEOPyNE6zZSogqse2Q==/109951164625068258.jpg',
-          text: '熬夜写作业必备醒脑歌单（英文）',
-          Num: '81万'
-        },
-        {
-          id: '0002',
-          imgUrl: 'http://p3.music.126.net/ajoA2VrwgES6ovTHJRc15w==/109951164814653033.jpg',
-          text: '[一周日语上新] RADWIMPS最新单曲 点一盏明灯照亮漫漫长夜',
-          Num: '3746万'
-        },
-        {
-          id: '0003',
-          imgUrl: 'http://p3.music.126.net/BeIc-sv62xZPpVBS4DjE-g==/109951164607988464.jpg',
-          text: '私人雷达|根据听歌记录为你打造',
-          Num: '7133万'
-        },
-        {
-          id: '0004',
-          imgUrl: 'http://p4.music.126.net/x44v5IkLN30gWgUYWYivbg==/109951164000997664.jpg',
-          text: '男生的温柔侵入心底 珊瑚长出海面伸向月亮',
-          Num: '1929万'
-        },
-        {
-          id: '0005',
-          imgUrl: 'http://p3.music.126.net/imAiEP2RbTdLA639FzCo1g==/109951164604265438.jpg',
-          text: 'Synth Pop丨复古青年浪漫合成器',
-          Num: '64万'
-        }
-      ]
+      recommendList: []
     }
   },
   mounted () {
     this._recommedinit()
+    this.GetRecommend()
   },
   methods: {
     _recommedinit () {
       let recWidth = 90 // 图片宽度
       let margin = 13
-      let width = (recWidth + margin) * this.recommendList.length - margin
+      let width = (recWidth + margin) * 6 - margin
       this.$refs.container.style.width = width + 'px' // 给ul设置了宽度
       this.$nextTick(() => {
         if (!this.recScroll) {
@@ -75,6 +46,32 @@ export default {
         } else {
           this.recScroll.refresh()
         }
+      })
+    },
+    NumFilter (num) {
+      var shu = ''
+      var unit = num
+      var wan = num / 10000
+      var yi = num / 100000000
+      if ((yi) > 1) {
+        shu += parseInt(yi) + '亿'
+      } else {
+        if (wan > 10) {
+          shu += parseInt(wan) + '万'
+        } else {
+          shu += unit
+        }
+      }
+      return shu
+    },
+    GetRecommend () {
+      this.$nextTick(() => {
+        axios.get('http://localhost:3000/personalized?limit=6').then(res => res.data).then(data => {
+          this.recommendList = data.result
+        })
+        axios.get('http://localhost:3000/personalized/newsong').then(res => res.data).then(data => {
+          console.log(data)
+        })
       })
     }
   }
@@ -106,6 +103,8 @@ export default {
         overflow hidden
         white-space nowrap
         width 100%
+        // height 0
+        // padding-bottom 34%
         margin-top 10px
         .content-container
             position relative

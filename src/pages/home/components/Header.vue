@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header"  :style="{'background-image':'url(' + user.backgroundUrl + ')'}">
       <div class="avatar-wrapper">
           <div class="avatar"><img :src="user.avatarUrl"></div>
           <div class="info">
@@ -58,6 +58,8 @@ export default {
     level () {
       return this.$store.state.level
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -66,7 +68,7 @@ export default {
 .header
     position relative
     padding 15px 15px 30px 15px
-    background rgba(0,0,0,0.8)
+    // background rgba(0,0,0,0.8)
     color #fff
     .avatar-wrapper
         width 100%

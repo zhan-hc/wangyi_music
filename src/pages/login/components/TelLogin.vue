@@ -40,7 +40,7 @@ export default {
             this.$store.commit('ChangeUserLevel', data.level)
           })
           axios.get('http://localhost:3000/user/playlist?uid=' + id).then(res => res.data).then(data => {
-            // console.log(data)
+            console.log(data)
             this.$store.commit('ChangePlayList', data.playlist)
             this.$router.push({
               path: '/home'

@@ -1,11 +1,11 @@
 <template>
   <router-link tag="div" class="aplayer" to="/lyrics">
     <div class="aplayer-img">
-      <img :src="SongList.imgUrl"/>
+      <img :src="SongList.al.picUrl"/>
     </div>
     <div class="content">
       <div class="title">{{SongList.name}}</div>
-      <div class="author">{{SongList.author}}</div>
+      <div class="author">{{SongList.ar[0].name}}</div>
     </div>
     <div class="play">
       <span class="iconfont" :class="AudioStatu" @click.stop="play"></span>
@@ -13,7 +13,7 @@
     <div class="about">
       <span class="iconfont icon-caidan" @click.stop="ShowMenu"></span>
     </div>
-    <audio ref="audio" :src="SongList.mp3"></audio>
+    <audio ref="audio" :src="'http://music.163.com/song/media/outer/url?id=' + SongList.id + '.mp3'"></audio>
   </router-link>
 </template>
 

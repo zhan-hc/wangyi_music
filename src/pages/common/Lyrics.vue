@@ -5,7 +5,7 @@
               <div class="back"><span class="iconfont icon-fanhuipt" @click="HideLyrics"></span></div>
               <div class="text">
                   <span class="title">{{SongList.name}}</span>
-                  <span class="authors">{{SongList.author}} ></span>
+                  <span class="authors">{{SongList.ar[0].name}} ></span>
               </div>
               <div class="share"><span class="iconfont icon-fenxiangpt"></span></div>
           </div>
@@ -32,7 +32,7 @@
               <div class="level_1" :style="{'animation-play-state':Animation}">
                   <div class="level_2">
                       <div class="level_3">
-                          <img :src="SongList.imgUrl"/>
+                          <img :src="SongList.al.picUrl"/>
                       </div>
                   </div>
               </div>
