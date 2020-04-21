@@ -18,7 +18,6 @@
 </template>
 
 <script type="text/javascript">
-import Aplayer from 'vue-aplayer'
 export default {
   name: 'CommonAplayer',
   data () {
@@ -61,7 +60,9 @@ export default {
       }
     },
     '$store.state.SpotMove' () { // 当移动进度条时触发
-      this.$refs.audio.currentTime = (((this.$store.state.Song_X.slice(0, -2) - 57) / this.$store.state.SongWidth) * this.$refs.audio.duration).toFixed(6)
+      let time = (((this.$store.state.Song_X.slice(0, -2) - 57) / this.$store.state.SongWidth) * this.$refs.audio.duration).toFixed(6)
+      this.$refs.audio.currentTime = time
+      this.$store.commit('ChangecurrentTime', time)
     }
   },
   methods: {
@@ -96,7 +97,6 @@ export default {
     }
   },
   components: {
-    Aplayer
   }
 }
 </script>

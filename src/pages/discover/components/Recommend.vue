@@ -69,9 +69,9 @@ export default {
         axios.get('http://localhost:3000/personalized?limit=6').then(res => res.data).then(data => {
           this.recommendList = data.result
         })
-        axios.get('http://localhost:3000/personalized/newsong').then(res => res.data).then(data => {
-          console.log(data)
-        })
+        // axios.get('http://localhost:3000/lyric?id=167815').then(res => res.data).then(data => {
+        //   console.log(data)
+        // })
       })
     }
   }

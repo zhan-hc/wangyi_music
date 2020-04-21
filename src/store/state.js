@@ -49,8 +49,9 @@ export default {
   SongList: defaultSong, // 播放器中音乐
   Empty: false, // 清空搜索历史纪录的的弹出框状态
   History: ['枯木逢春', '国王与乞丐', '你想要的', '颜人中', '夏天的风'],
-  playlist: dataList,
-  userlist: user,
-  level: grade,
-  hotlist: ''
+  playlist: dataList, // 歌单
+  userlist: user, // 用户数据
+  level: grade, // 用户等级
+  hotlist: '', // 搜索排行榜
+  currentTime: ''// 当移动进度条时播放器的时间进度
 }

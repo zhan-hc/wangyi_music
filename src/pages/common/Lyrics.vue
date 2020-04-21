@@ -4,13 +4,13 @@
           <div class="header">
               <div class="back"><span class="iconfont icon-fanhuipt" @click="HideLyrics"></span></div>
               <div class="text">
-                  <span class="title">{{SongList.name}}</span>
+                  <span class="title" @click="test">{{SongList.name}}</span>
                   <span class="authors">{{SongList.ar[0].name}} ></span>
               </div>
               <div class="share"><span class="iconfont icon-fenxiangpt"></span></div>
           </div>
-          <div class="content">
-              <div class="stylus">
+          <div class="content" @click="ChangeLyricStatu">
+              <div class="stylus" v-show="lyricstatus">
                 <div class="box">
                   <div class="stylus_1" :style="{'transform':ChangeStylus}">
                     <div class="stylus_2">
@@ -29,16 +29,24 @@
                   </div>
                 </div>
               </div>
-              <div class="level_1" :style="{'animation-play-state':Animation}">
+              <div class="level_1" v-show="lyricstatus" :style="{'animation-play-state':Animation}">
                   <div class="level_2">
                       <div class="level_3">
                           <img :src="SongList.al.picUrl"/>
                       </div>
                   </div>
               </div>
+              <div class="song-lyric" ref="lyricList" v-show="!lyricstatus">
+                <div class="lyric-wrapper">
+                  <div v-if="currentLyric">
+                    <div class="item" ref="lyricLine" v-for="(list, index) in songLyric"
+                     :key="index" :class="{'current': currentLineNum === index}">{{list.txt}}</div>
+                  </div>
+                </div>
+              </div>
           </div>
           <div class="footer">
-              <div class="content">
+              <div class="content-wrapper">
                   <div class="function">
                       <span class="iconfont icon-xihuan-kongpt"></span>
                       <span class="iconfont icon-xiazaipt"></span>
@@ -67,13 +75,31 @@
 </template>
 
 <script type="text/javascript">
+import BScroll from 'better-scroll'
+import Lyric from 'lyric-parser'
+import axios from 'axios'
 export default {
   name: 'CommonLyrics',
   data () {
     return {
       positionX: 0,
-      positionY: 0
+      positionY: 0,
+      currentLyric: null, // 设置一个歌词维护属性
+      currentLineNum: 0,
+      songLyric: [],
+      lyricstatus: true,
+      lyric: null
     }
+  },
+  watch: {
+    'this.$store.state.Song_X' () {
+      // console.log(this.$store.state.currentTime)
+      // this.currentLyric.seek(this.$store.state.currentTime * 1000)
+    }
+  },
+  mounted () {
+    this.$store.commit('UpdateSongWidth', this.$refs.abc.offsetWidth)
+    this.init_LyricScroll()
   },
   methods: {
     HideLyrics () {
@@ -86,10 +112,53 @@ export default {
       this.positionX = e.offsetX // 获取鼠标移动的水平位移
       this.$store.commit('UpdateSongX', this.positionX + 57 + 'px')
       this.$store.commit('UpdateSpotMove', this.positionX + 'px')
+      this.timer = setTimeout(() => {
+        this.currentLyric.seek(this.$store.state.currentTime * 1000)
+      }, 100)
+    },
+    handleLyric ({lineNum, txt}) {
+      this.currentLineNum = lineNum
+      if (lineNum > 5) {
+        let lineEl = this.$refs.lyricLine[lineNum - 5]
+        this.lyricList.scrollToElement(lineEl, 1000)// 滚动到元素
+      } else {
+        this.lyricList.scrollTo(0, 0, 1000)// 滚动到顶部
+      }
+      this.playingLyric = txt
+    },
+    init_LyricScroll () { // 初始化歌词的滚动
+      this.$nextTick(() => {
+        this.$refs.lyricList.style.height = window.screen.height - 200 + 'px'
+        if (!this.lyricList) {
+          this.lyricList = new BScroll(this.$refs.lyricList, {
+            click: true
+          })
+        } else {
+          this.lyricList.refresh()
+        }
+        this.play_Lyric()
+      })
+    },
+    play_Lyric () {
+      // this.$nextTick(() => {
+      axios.get('http://localhost:3000/lyric?id=' + this.SongList.id).then(res => res.data).then(data => {
+        if (data.code === 200) {
+          this.lyric = data.lrc.lyric // 歌词数据
+          this.currentLyric = new Lyric(this.lyric, this.handleLyric) // this.handleLyric回调函数
+          this.songLyric = this.currentLyric.lines
+          if (this.$store.state.AudioStatus) {
+            this.currentLyric.play()
+          }
+        }
+      })
+      // })
+    },
+    ChangeLyricStatu () { // 点击变换成歌词或唱盘
+      this.lyricstatus = !this.lyricstatus
+    },
+    test () {
+      this.currentLyric.seek(35 * 1000)
     }
-  },
-  mounted () {
-    this.$store.commit('UpdateSongWidth', this.$refs.abc.offsetWidth)
   },
   computed: {
     SongStartTime () {
@@ -132,6 +201,7 @@ export default {
   components: {
   }
 }
+
 </script>
 
 <style lang="stylus" scoped >
@@ -142,6 +212,9 @@ transform: rotate(0deg);
 100%{
 transform: rotate(360deg);
 }
+}
+.current{
+  color #fff
 }
 .lyrics
     position fixed
@@ -189,8 +262,9 @@ transform: rotate(360deg);
         .content
             flex 1
             margin auto
-            width 100%
+            // width 100%
             text-align center
+            overflow hidden
             .stylus
               .box
                 position absolute
@@ -303,66 +377,73 @@ transform: rotate(360deg);
                         img
                             width 100%
                             border-radius 50%
+            .song-lyric
+              position relative
+              color #999
+              overflow hidden
+              .lyric-wrapper
+                .item
+                  width 100%
+                  margin 15px 0
         .footer
-            flex 0 0 180px
             position relative
-            height 150px
-            .function
-                display flex
-                color rgba(255,255,255,0.8)
-                margin-top 20px
-                .iconfont
-                    flex 1
-                    font-size 24px
-            .progress
-                width 100%
-                display flex
-                color rgba(255,255,255,0.6)
-                position relative
-                // border 2px solid #fff
-                margin-top 15px
-                .now-time
-                    flex 0 0 20px
-                    font-size 10px
-                    padding-left 20px
-                    // border 2px solid #fff
-                    // margin-bottom 5px
-                .sum-time
-                    flex 0 0 20px
-                    padding-right 20px
-                    font-size 10px
-                    // border 2px solid #fff
-                .now-progress
-                    margin 0 10px
-                    flex 1
-                    border-bottom 2px solid #696A6C
-                .spot
-                    position absolute
-                    bottom -1px
-                    background #ffffff
-                    width 5px
-                    height 5px
-                    border-radius 50%
-                .after-time
-                    position absolute
+            height 160px
+            .content-wrapper
+                .function
+                    position relative
+                    text-align center
+                    padding-top 10px
+                    display flex
+                    color rgba(255,255,255,0.8)
+                    // margin-top 20px
+                    .iconfont
+                        flex 1
+                        font-size 24px
+                .progress
+                    // width 100%
+                    display flex
+                    color rgba(255,255,255,0.6)
+                    position relative
+                    margin-top 15px
+                    .now-time
+                        flex 0 0 20px
+                        font-size 10px
+                        padding-left 20px
+                    .sum-time
+                        flex 0 0 20px
+                        padding-right 20px
+                        font-size 10px
+                    .now-progress
+                        margin 0 10px
+                        flex 1
+                        border-bottom 2px solid #696A6C
+                    .spot
+                        position absolute
+                        bottom -1px
+                        background #ffffff
+                        width 5px
+                        height 5px
+                        border-radius 50%
+                    .after-time
+                        position absolute
+                        bottom 0
+                        left 57px
+                        border-bottom 2px solid #969799
+                .main
+                    position fixed
                     bottom 0
-                    left 57px
-                    border-bottom 2px solid #969799
-
-            .main
-                position fixed
-                bottom 0
-                left 0
-                padding-bottom 20px
-                line-height 65px
-                width 100%
-                display flex
-                color #fff
-                .icon--lbxh,.icon-xiangyiqu,.icon-xiayiqu-wangyiicon,.icon-caidan-wangyiicon
-                    flex 1
-                    font-size 24px
-                .icon-zanting1,.icon-bofang2
-                    flex 1
-                    font-size 65px
+                    left 0
+                    padding-bottom 20px
+                    line-height 65px
+                    width 100%
+                    display flex
+                    color #fff
+                    text-align center
+                    .icon--lbxh,.icon-xiangyiqu,.icon-xiayiqu-wangyiicon,.icon-caidan-wangyiicon
+                        flex 1
+                        font-size 24px
+                    .icon-zanting1,.icon-bofang2
+                        flex 1
+                        font-size 65px
 
 </style>

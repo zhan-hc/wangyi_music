@@ -38,6 +38,9 @@ export default {
   UpdateSpotMove (state, x) { // 改变鼠标的点击的位移
     state.SpotMove = x
   },
+  ChangecurrentTime (state, time) { // 改变播放器时间进度
+    state.currentTime = time
+  },
   ChangeSong (state, song) { // 改变歌曲
     state.SongList = song
     try {
