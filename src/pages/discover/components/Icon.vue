@@ -1,8 +1,29 @@
 <template>
   <div class="icon-container border-bottom">
-      <div class="icon-wrapper" v-for="list in iconList" :key="list.id">
-          <div class="icon-bg"><span class="iconfont" :class="list.name"></span></div>
-          <div class="text">{{list.text}}</div>
+      <router-link to="/daily" tag="div" class="icon-wrapper">
+          <div class="icon-bg">
+            <span class="iconfont icon-rili"></span></div>
+          <div class="text">每日推荐</div>
+      </router-link>
+      <div class="icon-wrapper">
+          <div class="icon-bg">
+            <span class="iconfont icon-yinpingedan"></span></div>
+          <div class="text">歌单</div>
+      </div>
+      <div class="icon-wrapper">
+          <div class="icon-bg">
+            <span class="iconfont icon-paihangbang"></span></div>
+          <div class="text">排行榜</div>
+      </div>
+      <div class="icon-wrapper">
+          <div class="icon-bg">
+            <span class="iconfont icon-diantai"></span></div>
+          <div class="text">电台</div>
+      </div>
+      <div class="icon-wrapper">
+          <div class="icon-bg">
+            <span class="iconfont icon-Shape"></span></div>
+          <div class="text">直播</div>
       </div>
   </div>
 </template>

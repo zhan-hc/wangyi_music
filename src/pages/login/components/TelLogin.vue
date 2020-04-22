@@ -39,6 +39,9 @@ export default {
             this.$store.commit('ChangeUserList', data.profile)
             this.$store.commit('ChangeUserLevel', data.level)
           })
+          axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
+            this.$store.commit('ChangeDaily', data.recommend)
+          })
           axios.get('http://localhost:3000/user/playlist?uid=' + id).then(res => res.data).then(data => {
             console.log(data)
             this.$store.commit('ChangePlayList', data.playlist)

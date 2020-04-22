@@ -6,15 +6,18 @@
           </router-link>
           <div class="title">{{title}}</div>
           <div class="icon">
-              <span class="iconfont icon-threepoint"></span>
+              <span class="iconfont icon-wenhao"></span>
           </div>
       </div>
-      <div class="content-wrapper"  ref="songScroll">
+      <div class="content-wrapper"  ref="songScroll"
+      :style="{'background-image': 'url(' + Randombg +')'}">
         <div class="container">
             <div class="desc-wrapper">
                 <div class="null">
                 </div>
                 <div class="content" ref="Main">
+                  <div class="time"><span class="day">{{day}}</span>/{{month}}</div>
+                  <div class="title">历史日推</div>
                 </div>
             </div>
             <div class="song_menu-wrapper">
@@ -24,12 +27,14 @@
                         <div class="desc">播放全部<span class="num">(共{{playlist.trackCount}}首)</span></div>
                     </div>
                     <div class="song-wrapper">
-                        <div @click.stop="updateSong(list)"
-                         class="songlist" v-for="(list, index) in likelist" :key="list.id">
-                            <div class="id">{{index + 1}}</div>
+                        <div @click="updateSong(list.id)"
+                         class="songlist" v-for="(list, index) in dailylist" :key="index">
+                            <div class="img-wrapper">
+                              <img :src="list.album.picUrl">
+                            </div>
                             <div class="content">
                                 <div class="name">{{list.name}}</div>
-                                <div class="author">{{GetAlAr(list.ar, list.al)}}</div>
+                                <div class="author">{{GetAlAr(list.artists, list.album)}}</div>
                             </div>
                             <div class="mv">
                                 <span class="iconfont icon-mv"></span>
@@ -53,15 +58,17 @@ export default {
   name: 'DiscoverDeaily',
   data () {
     return {
-      likelist: [],
+      // dailylist: [],
       title: '',
-      active: ''
+      active: '',
+      day: '',
+      month: ''
     }
   },
   mounted () {
     this._initScroll()
     window.addEventListener('scroll', this.handleScroll)
-    this.GetLikeSong()
+    this.GetDatetime()
   },
   methods: {
     _initScroll () {
@@ -74,9 +81,9 @@ export default {
           })
           this.songScroll.on('scroll', (pos) => { // 判断滑动距离事件
             if (Math.abs(Math.round(pos.y)) > 70) {
-              this.title = '我喜欢的音乐'
+              this.title = '每日推荐'
             } else {
-              this.title = '歌单'
+              this.title = ''
             }
           })
         } else {
@@ -84,16 +91,23 @@ export default {
         }
       })
     },
-    updateSong (list) {
-      this.$store.commit('ChangeSong', list)
-      this.$store.commit('PlayAudio')
-    },
-    GetLikeSong () {
-      this.$nextTick(() => {
-        axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
-          console.log(data)
-        })
+    updateSong (id) {
+      axios.get('http://localhost:3000/song/detail?ids=' + id).then(res => res.data).then(data => {
+        if (data.code === 200) {
+          this.$store.commit('ChangeSong', data.songs[0])
+          this.$store.commit('PlayAudio')
+        }
       })
+    },
+    GetDatetime () {
+      let mm = new Date().getMonth() + 1
+      let dd = new Date().getDate()
+      this.day = dd
+      if (mm.toString.length === 1) {
+        this.month = '0' + mm
+      } else {
+        this.month = mm
+      }
     },
     GetAlAr (listar, listal) {
       var detail = ''
@@ -114,6 +128,13 @@ export default {
     },
     playlist () {
       return this.$store.state.playlist[0]
+    },
+    dailylist () {
+      return this.$store.state.daily
+    },
+    Randombg () {
+      let num = Math.ceil(Math.random() * this.dailylist.length)
+      return this.dailylist[num].album.picUrl
     }
   }
 }
@@ -139,7 +160,7 @@ export default {
         width 100%
         height 50px
         z-index 104
-        background rgba(0,0,0,0.2)
+        background rgba(105,105,105,0.2)
         opacity 1
         color #fff
         .back
@@ -164,6 +185,9 @@ export default {
     .content-wrapper
         position relative
         overflow hidden
+        // background-image url('http://p1.music.126.net/_RVi0cHgarQYomdbCaDTAQ==/109951164627112165.jpg')
+        background-repeat no-repeat
+        background-size 100% 50%
         height 700px
         .container
             position relative
@@ -171,19 +195,32 @@ export default {
                 position relative
                 width 100%
                 height 0
-                background-image url('http://p1.music.126.net/_RVi0cHgarQYomdbCaDTAQ==/109951164627112165.jpg')
-                background-repeat no-repeat
-                background-size 100% 100%
-                padding-bottom 80%
+                padding-bottom 60%
+                // border 2px solid red
                 .null
                     position relative
                     width 100%
                     height 50px
-                    background #fff
+                    // background #fff
                 .content
                     position relative
                     margin-top 20px
                     padding 0 15px 20px 15px
+                    .time
+                      position absolute
+                      top 60px
+                      left 15px
+                      color #fff
+                      .day
+                        font-size 28px
+                    .title
+                      position absolute
+                      top 100px
+                      left 15px
+                      font-size 12px
+                      padding 5px 10px
+                      border-radius 10px
+                      background rgba(255,255,255,0.8)
             .song_menu-wrapper
                 position relative
                 margin-top -15px
@@ -214,15 +251,21 @@ export default {
                             margin-top 5px
                             height 50px
                             display flex
-                            .id
+                            .img-wrapper
                                 display inline-block
-                                width 30px
-                                flex 0 0 30px
-                                height 30px
+                                width 40px
+                                flex 0 0 40px
+                                height 40px
                                 line-height 50px
                                 text-align center
-                                vertical-align top
+                                border-radius 5px
+                                padding 5px
+                                // vertical-align middle
                                 color #999
+                                img
+                                    width 100%
+                                    height 100%
+                                    border-radius 5px
                             .content
                                 flex 1
                                 min-width 0

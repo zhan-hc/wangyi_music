@@ -47,6 +47,12 @@ export default {
       localStorage.SongList = JSON.stringify(song)
     } catch (e) {}
   },
+  ChangeDaily (state, daily) { // 改变歌曲
+    state.daily = daily
+    try {
+      localStorage.daily = JSON.stringify(daily)
+    } catch (e) {}
+  },
   AddHistory () {
   },
   hideHistory (state) { // 隐藏历史纪录的的弹出框

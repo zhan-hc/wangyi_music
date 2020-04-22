@@ -36,6 +36,13 @@ try {
     grade = JSON.parse(localStorage.level)
   }
 } catch (e) {}
+// daily
+let dailyrec = ''
+try {
+  if (localStorage.daily) {
+    dailyrec = JSON.parse(localStorage.daily)
+  }
+} catch (e) {}
 export default {
   CategoryStatus: false, // 设置菜单状态
   AudioStatus: false, // 播放器的状态
@@ -53,5 +60,7 @@ export default {
   userlist: user, // 用户数据
   level: grade, // 用户等级
   hotlist: '', // 搜索排行榜
-  currentTime: ''// 当移动进度条时播放器的时间进度
+  currentTime: '', // 当移动进度条时播放器的时间进度
+  daily: dailyrec // 推荐歌单
+
 }
