@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
       <div class="header-wrapper">
-          <div class="header-top" @click="NumFilter(15420)">推荐歌单</div>
+          <div class="header-top">推荐歌单</div>
           <div class="header-left">为你精挑细选</div>
           <div class="header-right">查看更多</div>
       </div>
@@ -69,7 +69,7 @@ export default {
         axios.get('http://localhost:3000/personalized?limit=6').then(res => res.data).then(data => {
           this.recommendList = data.result
         })
-        // axios.get('http://localhost:3000/lyric?id=167815').then(res => res.data).then(data => {
+        // axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
         //   console.log(data)
         // })
       })
@@ -103,8 +103,8 @@ export default {
         overflow hidden
         white-space nowrap
         width 100%
-        // height 0
-        // padding-bottom 34%
+        height 0
+        padding-bottom 120px
         margin-top 10px
         .content-container
             position relative

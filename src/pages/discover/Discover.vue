@@ -4,6 +4,7 @@
     <discover-icon></discover-icon>
     <discover-recommend></discover-recommend>
     <discover-song></discover-song>
+    <discover-recommend></discover-recommend>
   </div>
 </template>
 
@@ -35,5 +36,5 @@ export default {
 <style lang="stylus" scoped >
 .discover
   overflow hidden
-  margin-bottom 50px
+  margin-bottom 60px
 </style>

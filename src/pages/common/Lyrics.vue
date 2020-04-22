@@ -4,7 +4,7 @@
           <div class="header">
               <div class="back"><span class="iconfont icon-fanhuipt" @click="HideLyrics"></span></div>
               <div class="text">
-                  <span class="title" @click="test">{{SongList.name}}</span>
+                  <span class="title">{{SongList.name}}</span>
                   <span class="authors">{{SongList.ar[0].name}} ></span>
               </div>
               <div class="share"><span class="iconfont icon-fenxiangpt"></span></div>
@@ -48,7 +48,7 @@
           <div class="footer">
               <div class="content-wrapper">
                   <div class="function">
-                      <span class="iconfont icon-xihuan-kongpt"></span>
+                      <span class="iconfont" @click="ChangeLikeStatus" :class="{'icon-xihuan-kongpt': likestatus,'icon-xihuan-wangyiicon':!likestatus}"></span>
                       <span class="iconfont icon-xiazaipt"></span>
                       <span class="iconfont icon-lingsheng1"></span>
                       <span class="iconfont icon-pinglunpt1"></span>
@@ -63,7 +63,7 @@
                   </div>
                   <div class="main">
                       <span class="iconfont icon--lbxh"></span>
-                      <span class="iconfont icon-xiangyiqu"></span>
+                      <span class="iconfont icon-xiangyiqu" ></span>
                       <span class="iconfont" :class="AudioStatu" @click="play"></span>
                       <span class="iconfont icon-xiayiqu-wangyiicon"></span>
                       <span class="iconfont icon-caidan-wangyiicon"></span>
@@ -88,13 +88,18 @@ export default {
       currentLineNum: 0,
       songLyric: [],
       lyricstatus: true,
-      lyric: null
+      lyric: null,
+      likestatus: true
     }
   },
   watch: {
-    'this.$store.state.Song_X' () {
-      // console.log(this.$store.state.currentTime)
-      // this.currentLyric.seek(this.$store.state.currentTime * 1000)
+    '$store.state.AudioStatus' () { // 监听播放的全局的播放状态
+      // if (this.$store.state.AudioStatus) {
+      //   this.$refs.audio.play()
+      // } else {
+      //   this.$refs.audio.pause()
+      // }
+      this.currentLyric.togglePlay()
     }
   },
   mounted () {
@@ -141,13 +146,18 @@ export default {
     },
     play_Lyric () {
       // this.$nextTick(() => {
+      // console.log(this.SongList.id)
       axios.get('http://localhost:3000/lyric?id=' + this.SongList.id).then(res => res.data).then(data => {
         if (data.code === 200) {
-          this.lyric = data.lrc.lyric // 歌词数据
-          this.currentLyric = new Lyric(this.lyric, this.handleLyric) // this.handleLyric回调函数
-          this.songLyric = this.currentLyric.lines
-          if (this.$store.state.AudioStatus) {
-            this.currentLyric.play()
+          if (data.lrc) {
+            this.lyric = data.lrc.lyric // 歌词数据
+            this.currentLyric = new Lyric(this.lyric, this.handleLyric) // this.handleLyric回调函数
+            this.songLyric = this.currentLyric.lines
+            if (this.$store.state.AudioStatus) {
+              this.currentLyric.play()
+            }
+          } else {
+            this.songLyric = [{'txt': '还没收录歌词'}]
           }
         }
       })
@@ -156,8 +166,8 @@ export default {
     ChangeLyricStatu () { // 点击变换成歌词或唱盘
       this.lyricstatus = !this.lyricstatus
     },
-    test () {
-      this.currentLyric.seek(35 * 1000)
+    ChangeLikeStatus () {
+      this.likestatus = !this.likestatus
     }
   },
   computed: {
@@ -396,6 +406,8 @@ transform: rotate(360deg);
                     display flex
                     color rgba(255,255,255,0.8)
                     // margin-top 20px
+                    .icon-xihuan-wangyiicon
+                        color red
                     .iconfont
                         flex 1
                         font-size 24px
