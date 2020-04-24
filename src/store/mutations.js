@@ -53,7 +53,11 @@ export default {
       localStorage.daily = JSON.stringify(daily)
     } catch (e) {}
   },
-  AddHistory () {
+  AddHistory (state, text) {
+    state.history.push(text)
+    try {
+      localStorage.history = JSON.stringify(state.history)
+    } catch (e) {}
   },
   hideHistory (state) { // 隐藏历史纪录的的弹出框
     state.Empty = false
@@ -61,8 +65,8 @@ export default {
   showHistory (state) { // 显示历史纪录的的弹出框
     state.Empty = true
   },
-  EmptyHistory (state) {
-    state.History = []
+  EmptyHistory (state) { // 清空历史记录
+    state.history = []
   },
   ChangePlayList (state, list) { // 改变歌曲信息
     state.playlist = list
@@ -81,5 +85,8 @@ export default {
     try {
       localStorage.level = i
     } catch (e) {}
+  },
+  ChangeSearch (state, content) { // 显示历史纪录的的弹出框
+    state.search = content
   }
 }

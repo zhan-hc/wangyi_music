@@ -106,7 +106,7 @@ export default {
     position fixed
     bottom 0px
     left 0px
-    z-index 105
+    z-index 106
     width 100%
     height 50px
     background #ffffff

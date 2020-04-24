@@ -14,6 +14,7 @@ import PhoneRegister from '../pages/login/components/PhoneRegister.vue'
 import TelLogin from '../pages/login/components/TelLogin.vue'
 import Rename from '../pages/login/components/Rename.vue'
 import DiscoverDaily from '../pages/discover/components/Daily.vue'
+import SearchResult from '../pages/common/SearchResult.vue'
 
 Vue.use(Router)
 
@@ -88,6 +89,11 @@ export default new Router({
       path: '/daily',
       name: 'DiscoverDaily',
       component: DiscoverDaily
+    },
+    {
+      path: '/searchresult',
+      name: 'SearchResult',
+      component: SearchResult
     }
   ]
 })

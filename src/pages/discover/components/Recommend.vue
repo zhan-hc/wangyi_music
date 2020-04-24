@@ -69,7 +69,7 @@ export default {
         axios.get('http://localhost:3000/personalized?limit=6').then(res => res.data).then(data => {
           this.recommendList = data.result
         })
-        // axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
+        // axios.get('http://localhost:3000/search?keywords=你瞒我瞒').then(res => res.data).then(data => {
         //   console.log(data)
         // })
       })

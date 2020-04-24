@@ -1,7 +1,7 @@
 <template>
   <div class="favorite-wrapper">
       <div class="header-wrapper">
-          <router-link tag="div" to="/home" class="back">
+          <router-link tag="div" to="/" class="back">
               <span class="iconfont icon-fanhuipt"></span>
           </router-link>
           <div class="title">{{title}}</div>
@@ -99,7 +99,7 @@ export default {
         }
       })
     },
-    GetDatetime () {
+    GetDatetime () { // 获取当前日期
       let mm = new Date().getMonth() + 1
       let dd = new Date().getDate()
       this.day = dd
