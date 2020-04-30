@@ -36,6 +36,9 @@ export default {
     },
     SongList () {
       return this.$store.state.SongList
+    },
+    Nowlist () {
+      return this.$store.state.NowList
     }
   },
   mounted () {
@@ -49,6 +52,15 @@ export default {
       this.$store.commit('UpdateSongNow', this.transTime(this.$refs.audio.currentTime))
       this.$store.commit('UpdateSongX', (((this.$refs.audio.currentTime / this.$refs.audio.duration) * this.$store.state.SongWidth) + 57) + 'px')
       this.$store.commit('UpdateSongRate', ((this.$refs.audio.currentTime / this.$refs.audio.duration * this.$store.state.SongWidth)).toFixed(2) + 'px')
+    }
+    this.$refs.audio.onended = () => {
+      console.log('歌曲结束')
+      var sq = parseInt(this.SongList.index)
+      if (sq === this.Nowlist.length - 1) {
+        sq = -1
+      }
+      this.Nowlist[sq + 1].index = sq + 1
+      this.$store.commit('ChangeSong', this.Nowlist[sq + 1])
     }
   },
   watch: {

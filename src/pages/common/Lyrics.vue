@@ -63,9 +63,9 @@
                   </div>
                   <div class="main">
                       <span class="iconfont icon--lbxh"></span>
-                      <span class="iconfont icon-xiangyiqu" ></span>
+                      <span class="iconfont icon-xiangyiqu" @click="LastSong"></span>
                       <span class="iconfont" :class="AudioStatu" @click="play"></span>
-                      <span class="iconfont icon-xiayiqu-wangyiicon"></span>
+                      <span class="iconfont icon-xiayiqu-wangyiicon" @click="NextSong"></span>
                       <span class="iconfont icon-caidan-wangyiicon"></span>
                   </div>
               </div>
@@ -168,6 +168,22 @@ export default {
     },
     ChangeLikeStatus () {
       this.likestatus = !this.likestatus
+    },
+    NextSong () {
+      var sq = parseInt(this.SongList.index)
+      if (sq === this.Nowlist.length - 1) {
+        sq = -1
+      }
+      this.Nowlist[sq + 1].index = sq + 1
+      this.$store.commit('ChangeSong', this.Nowlist[sq + 1])
+    },
+    LastSong () {
+      var sq = parseInt(this.SongList.index)
+      if (sq === 0) {
+        sq = this.Nowlist.length
+      }
+      this.Nowlist[sq - 1].index = sq - 1
+      this.$store.commit('ChangeSong', this.Nowlist[sq - 1])
     }
   },
   computed: {
@@ -206,6 +222,9 @@ export default {
       } else {
         return 'rotate(-50deg)'
       }
+    },
+    Nowlist () {
+      return this.$store.state.NowList
     }
   },
   components: {

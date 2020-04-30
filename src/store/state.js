@@ -1,16 +1,14 @@
 let defaultSong = { // 播放器中音乐
-  id: '0001',
-  imgUrl: 'http://p2.music.126.net/6TNYBV2rezZLiwsGYBgmPw==/123145302311773.jpg',
-  name: '幻听',
-  author: '许嵩',
-  icon: 'icon-sq',
-  desc: '心酸纵有千百种 沉默不语最难过',
-  mp3: 'http://music.163.com/song/media/outer/url?id=167655.mp3',
-  background: 'linear-gradient(#0d080a,#8d0744,#311c25)'
 }
 try {
   if (localStorage.SongList) {
     defaultSong = JSON.parse(localStorage.SongList)
+  }
+} catch (e) {}
+let nowsong = [] // 播放器中音乐
+try {
+  if (localStorage.NowList) {
+    nowsong = JSON.parse(localStorage.NowList)
   }
 } catch (e) {}
 // 自己的歌单
@@ -37,7 +35,7 @@ try {
   }
 } catch (e) {}
 // daily
-let dailyrec = ''
+let dailyrec = []
 try {
   if (localStorage.daily) {
     dailyrec = JSON.parse(localStorage.daily)
@@ -47,7 +45,7 @@ try {
 let lishi = []
 try {
   if (localStorage.history) {
-    dailyrec = JSON.parse(localStorage.history)
+    lishi = JSON.parse(localStorage.history)
   }
 } catch (e) {}
 export default {
@@ -69,6 +67,7 @@ export default {
   hotlist: '', // 搜索排行榜
   currentTime: '', // 当移动进度条时播放器的时间进度
   daily: dailyrec, // 推荐歌单
-  search: ''
+  search: '', // 历史记录
+  NowList: nowsong
 
 }

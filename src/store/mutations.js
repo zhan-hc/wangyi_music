@@ -47,10 +47,16 @@ export default {
       localStorage.SongList = JSON.stringify(song)
     } catch (e) {}
   },
-  ChangeDaily (state, daily) { // 改变歌曲
-    state.daily = daily
+  ChangeNext (state, song) { // 改变下一首歌曲
+    state.NowList = song
     try {
-      localStorage.daily = JSON.stringify(daily)
+      localStorage.NowList = JSON.stringify(song)
+    } catch (e) {}
+  },
+  ChangeDaily (state, data) { // 改变歌曲
+    state.daily = data
+    try {
+      localStorage.daily = JSON.stringify(data)
     } catch (e) {}
   },
   AddHistory (state, text) {

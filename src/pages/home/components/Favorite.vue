@@ -58,7 +58,7 @@
                         <div class="desc">播放全部<span class="num">(共{{playlist.trackCount}}首)</span></div>
                     </div>
                     <div class="song-wrapper">
-                        <div @click.stop="updateSong(list)"
+                        <div @click.stop="updateSong(list,index)"
                          class="songlist" v-for="(list, index) in likelist" :key="list.id">
                             <div class="id">{{index + 1}}</div>
                             <div class="content">
@@ -118,7 +118,8 @@ export default {
         }
       })
     },
-    updateSong (list) {
+    updateSong (list, index) {
+      list.index = index
       this.$store.commit('ChangeSong', list)
       this.$store.commit('PlayAudio')
     },
@@ -126,6 +127,7 @@ export default {
       this.$nextTick(() => {
         axios.get('http://localhost:3000/playlist/detail?id=' + this.playlist.id).then(res => res.data).then(data => {
           this.likelist = data.playlist.tracks
+          this.$store.commit('ChangeNext', this.likelist)
         })
       })
     },

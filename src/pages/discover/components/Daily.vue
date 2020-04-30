@@ -66,6 +66,7 @@ export default {
     }
   },
   mounted () {
+    // this.initDaily()
     this._initScroll()
     window.addEventListener('scroll', this.handleScroll)
     this.GetDatetime()
@@ -91,6 +92,23 @@ export default {
         }
       })
     },
+    // initDaily () {
+    //   // axios.get('http://localhost:3000/login/status').then(res => res.data).then(data => {
+    //   //   if (data.code === 200) {
+    //   //     axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
+    //   //       console.log(data)
+    //   //       this.dailylist = data.recommend
+    //   //     })
+    //   //   }
+    //   this.$nextTick(() => {
+    //     axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
+    //       console.log(data)
+    //       this.dailylist = data.recommend
+    //     }).catch((error) => {
+    //       console.log(error.response.status)
+    //     })
+    //   })
+    // },
     updateSong (id) {
       axios.get('http://localhost:3000/song/detail?ids=' + id).then(res => res.data).then(data => {
         if (data.code === 200) {
@@ -273,6 +291,8 @@ export default {
                                 padding 5px
                                 .name
                                     font-size 14px
+                                    width 90%
+                                    ellipsis()
                                 .author
                                     width 90%
                                     font-size 12px
