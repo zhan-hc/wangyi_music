@@ -2,17 +2,18 @@
   <div class="song">
       <div class="header-wrapper">
           <div class="header-top">歌曲推荐</div>
-          <div class="header-left">根据羡慕推荐</div>
+          <div class="header-left">{{message}}新歌速递</div>
           <div class="header-right"><span class="iconfont icon-bofang"></span>播放全部</div>
       </div>
       <div class="content-wrapper" ref="ContentScroll">
           <div class="container" ref="container">
               <div class="content-song" :style="{'width': clientWidth + 'px'}" v-for="(page, index) in pages" :key="index">
                   <div class="list" v-for="list in page" :key="list.id">
-                      <div class="list-img"><img :src="list.imgUrl"></div>
-                      <div class="name">{{list.name}}<span class="author">  ─ &nbsp;{{list.author}}</span></div>
-                      <div class="desc" :class="{'desc-active': !list.icon}"><span class="iconfont" :class="list.icon"></span>{{list.desc}}</div>
-                      <div class="icon"><span class="iconfont icon-bofang1" @click="updateSong(list)"></span></div>
+                      <div class="list-img"><img :src="list.album.picUrl"></div>
+                      <div class="name" :class="{lineheight: haveDesc(list.alias[0])}"
+                      :style="{'width': clientWidth * 0.6 + 'px'}">{{list.name}}<span class="author">  ─ &nbsp;{{GetAlAr(list.artists)}}</span></div>
+                      <div class="desc"><span class="iconfont"></span>{{list.alias[0]}}</div>
+                      <div class="icon"><span class="iconfont icon-bofang1" @click="updateSong(list.id)"></span></div>
                   </div>
               </div>
           </div>
@@ -22,77 +23,20 @@
 
 <script type="text/javascript">
 import BScroll from 'better-scroll'
+import axios from 'axios'
 export default {
   name: 'DiscoverSong',
   data () {
     return {
-      songList: [
-        {
-          id: '0001',
-          imgUrl: 'http://p2.music.126.net/6TNYBV2rezZLiwsGYBgmPw==/123145302311773.jpg',
-          name: '幻听',
-          author: '许嵩',
-          icon: 'icon-sq',
-          desc: '心酸纵有千百种 沉默不语最难过',
-          mp3: 'http://music.163.com/song/media/outer/url?id=167655.mp3',
-          background: 'linear-gradient(#0d080a,#8d0744,#311c25)'
-        },
-        {
-          id: '0002',
-          imgUrl: 'http://p2.music.126.net/qX7ixB5ZT2wVJwgACuf_nA==/109951164623078367.jpg',
-          name: '悬日',
-          author: '田馥甄',
-          desc: '云音乐飙升榜16名',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1416387774.mp3',
-          background: 'linear-gradient(#686667, #C4B0A9, #746663)'
-        },
-        {
-          id: '0003',
-          imgUrl: 'http://p1.music.126.net/a0jjOlv-61XLSoIiMjjGgA==/109951164566000641.jpg',
-          name: '老友记',
-          author: '李荣浩',
-          icon: 'icon-dujia1',
-          desc: '纵使相逢应不识 尘满面 鬓如霜',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1410490187.mp3',
-          background: 'linear-gradient(#171B1E, #354650, #171B24)'
-        },
-        {
-          id: '0004',
-          imgUrl: 'http://p1.music.126.net/P3c_pg1RI5KXw7DFxGEh0w==/109951163784021165.jpg',
-          name: 'Parties',
-          author: 'Jake Miller',
-          desc: '超72%人播放',
-          mp3: 'http://music.163.com/song/media/outer/url?id=484365611.mp3',
-          background: 'linear-gradient(#171B1E, #354650, #171B24)'
-        },
-        {
-          id: '0005',
-          imgUrl: 'http://p1.music.126.net/sITJku5m96z6KF8c9P7fiA==/808141046459327.jpg',
-          name: 'Never Change',
-          author: 'Chase Coy',
-          icon: 'null',
-          desc: '阳光下 宁静 怀念曾经的自己',
-          mp3: 'http://music.163.com/song/media/outer/url?id=1141813.mp3',
-          background: 'linear-gradient(#486F90, #7CD0FF, #7F8A90)'
-        },
-        {
-          id: '0006',
-          imgUrl: 'http://p2.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg',
-          name: '异类',
-          author: '华晨宇',
-          icon: 'icon-dujia1',
-          desc: '长得像小白兔 唱的歌像大灰狼',
-          mp3: 'http://music.163.com/song/media/outer/url?id=33190545.mp3',
-          background: 'linear-gradient(#240e10, #CD031B, #240e10)'
-        }
-      ],
+      areasong: [],
+      message: '',
       clientWidth: document.body.clientWidth * 0.95
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.songList.forEach((item, index) => {
+      this.areasong.forEach((item, index) => {
         const page = Math.floor(index / 3) // icon处在第几页
         if (!pages[page]) {
           pages[page] = []
@@ -103,13 +47,14 @@ export default {
     }
   },
   mounted () {
+    this.RandomRecommend()
     this._recommedinit()
   },
   methods: {
     _recommedinit () {
       let recWidth = this.clientWidth // 图片宽度
       let margin = 0
-      let width = (recWidth + margin) * this.pages.length - margin
+      let width = (recWidth + margin) * 3 - margin
       this.$refs.container.style.width = width + 'px' // 给ul设置了宽度
       this.$nextTick(() => {
         if (!this.recScroll) {
@@ -123,19 +68,57 @@ export default {
         }
       })
     },
-    updateSong (list) {
-      this.$store.commit('ChangeSong', list)
-      this.$store.commit('PlayAudio')
+    updateSong (id) {
+      axios.get('http://localhost:3000/song/detail?ids=' + id).then(res => res.data).then(data => {
+        if (data.code === 200) {
+          console.log(data.songs[0])
+          this.$store.commit('ChangeSong', data.songs[0])
+          this.$store.commit('PlayAudio')
+        }
+      })
+    },
+    RandomRecommend () {
+      var rad = Math.floor(Math.random() * 4)
+      var area = ['欧美', '华语', '日本', '韩国']
+      let newsong = {'欧美': 96, '华语': 7, '日本': 8, '韩国': 16}
+      this.message = area[rad]
+      axios.get('http://localhost:3000/top/song?type=' + newsong[area[rad]]).then(res => res.data).then(data => {
+        for (var i = 0; i < 9; i++) {
+          this.areasong.push(data.data[i])
+        }
+      })
+    },
+    GetAlAr (listar) {
+      var detail = ''
+      listar.forEach((item, index) => {
+        if (index === listar.length - 1) {
+          detail += item.name
+        } else {
+          detail += item.name + '/'
+        }
+      })
+      return detail
+    },
+    haveDesc (desc) {
+      if (!desc) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped >
-.desc-active
-    background rgba(255,192,203,0.5)
-    color #DC143C !important
-    border-radius 2px
+@import '~styles/mixins.styl'
+// .desc-active
+//     background rgba(255,192,203,0.5)
+//     color #DC143C !important
+//     border-radius 2px
+.lineheight {
+  line-height 40px
+}
 .song
     position relative
     margin 15px auto
@@ -171,6 +154,7 @@ export default {
                 .list
                     position relative
                     height 60px
+                    // min-width 0
                     .list-img
                         width 50px
                         height 50px
@@ -183,6 +167,9 @@ export default {
                         left 60px
                         top 5px
                         font-size 12px
+                        // border 2px solid red
+                        // width 200px
+                        ellipsis()
                         .author
                             color rgba(0,0,0,0.5)
                             font-size 8px

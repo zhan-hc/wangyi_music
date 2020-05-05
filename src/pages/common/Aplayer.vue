@@ -53,14 +53,8 @@ export default {
       this.$store.commit('UpdateSongX', (((this.$refs.audio.currentTime / this.$refs.audio.duration) * this.$store.state.SongWidth) + 57) + 'px')
       this.$store.commit('UpdateSongRate', ((this.$refs.audio.currentTime / this.$refs.audio.duration * this.$store.state.SongWidth)).toFixed(2) + 'px')
     }
-    this.$refs.audio.onended = () => {
-      console.log('歌曲结束')
-      var sq = parseInt(this.SongList.index)
-      if (sq === this.Nowlist.length - 1) {
-        sq = -1
-      }
-      this.Nowlist[sq + 1].index = sq + 1
-      this.$store.commit('ChangeSong', this.Nowlist[sq + 1])
+    this.$refs.audio.onended = () => { // 当歌曲结束时执行
+      this.NextSong()
     }
   },
   watch: {
@@ -106,6 +100,14 @@ export default {
     },
     ShowMenu () {
       this.$store.commit('showMenu')
+    },
+    NextSong () {
+      var sq = parseInt(this.SongList.index)
+      if (sq === this.Nowlist.length - 1) {
+        sq = -1
+      }
+      this.Nowlist[sq + 1].index = sq + 1
+      this.$store.commit('ChangeSong', this.Nowlist[sq + 1])
     }
   },
   components: {

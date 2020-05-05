@@ -92,23 +92,6 @@ export default {
         }
       })
     },
-    // initDaily () {
-    //   // axios.get('http://localhost:3000/login/status').then(res => res.data).then(data => {
-    //   //   if (data.code === 200) {
-    //   //     axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
-    //   //       console.log(data)
-    //   //       this.dailylist = data.recommend
-    //   //     })
-    //   //   }
-    //   this.$nextTick(() => {
-    //     axios.get('http://localhost:3000/recommend/songs').then(res => res.data).then(data => {
-    //       console.log(data)
-    //       this.dailylist = data.recommend
-    //     }).catch((error) => {
-    //       console.log(error.response.status)
-    //     })
-    //   })
-    // },
     updateSong (id) {
       axios.get('http://localhost:3000/song/detail?ids=' + id).then(res => res.data).then(data => {
         if (data.code === 200) {

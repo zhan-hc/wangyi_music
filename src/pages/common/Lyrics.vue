@@ -170,12 +170,16 @@ export default {
       this.likestatus = !this.likestatus
     },
     NextSong () {
+      if (this.currentLyric) {
+        this.currentLyric.stop()
+      }
       var sq = parseInt(this.SongList.index)
       if (sq === this.Nowlist.length - 1) {
         sq = -1
       }
       this.Nowlist[sq + 1].index = sq + 1
       this.$store.commit('ChangeSong', this.Nowlist[sq + 1])
+      this.play_Lyric()
     },
     LastSong () {
       var sq = parseInt(this.SongList.index)

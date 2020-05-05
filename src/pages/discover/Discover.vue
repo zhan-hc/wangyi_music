@@ -4,7 +4,6 @@
     <discover-icon></discover-icon>
     <discover-recommend></discover-recommend>
     <discover-song></discover-song>
-    <discover-recommend></discover-recommend>
   </div>
 </template>
 
