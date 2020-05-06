@@ -79,7 +79,6 @@ export default {
       this.$nextTick(() => {
         axios.get('http://localhost:3000/dj/hot').then(res => res.data).then(data => {
           if (data.code === 200) {
-            console.log(data)
             this.yunList = data.djRadios
           }
         }).catch((error) => {

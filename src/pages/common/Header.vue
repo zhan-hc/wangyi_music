@@ -7,7 +7,7 @@
         <router-link tag="span" to="/home" active-class="active">我的</router-link>
         <router-link tag="span" to="/" active-class="active"  exact>发现</router-link>
         <router-link tag="span" to="/yuncun" active-class="active">云村</router-link>
-        <router-link tag="span" to="/video" active-class="active">视频</router-link>
+        <router-link tag="span" to="/vedio" active-class="active">视频</router-link>
       </div>
       <div class="header-right">
         <router-link tag="span" to="/search" class="iconfont icon-sousuo"></router-link>
