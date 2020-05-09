@@ -26,7 +26,7 @@
         </div>
         <div class="main-wrapper">
           <div class="item-wrapper" v-for="(page,index) in pages" :key="index">
-            <div class="item" v-for="list in page" :key="list.id">
+            <div class="item" v-for="list in page" :key="list.id" @click="playdetail(list.id)">
               <div class="img-wrapper">
                 <img :src="list.coverImgUrl">
               </div>
@@ -74,23 +74,19 @@ export default {
   },
   mounted () {
     this.init_playlist()
-    this.$forceUpdate()
   },
   watch: {
-    '$store.state.recplaylist' () {
-      // this.$forceUpdate()
-      console.log('change')
+    playList () {
+      this.$forceUpdate()
     }
   },
   computed: {
     carouseList () {
       let clist = []
-      // let list = JSON.parse(JSON.stringify(this.playList))
       for (var i = 0; i < 3; i++) {
         clist.push(this.playList[i])
       }
       return clist
-      // return list
     },
     recomList () {
       let list = JSON.parse(JSON.stringify(this.playList))
@@ -156,6 +152,10 @@ export default {
         }
       }
       return shu
+    },
+    playdetail (id) {
+      localStorage.playlist_id = id
+      this.$router.push('/playdetail')
     }
   },
   components: {
