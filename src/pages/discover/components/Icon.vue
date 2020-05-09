@@ -5,11 +5,11 @@
             <span class="iconfont icon-rili"></span></div>
           <div class="text">每日推荐</div>
       </router-link>
-      <div class="icon-wrapper">
+      <router-link to="/playlist" tag="div" class="icon-wrapper">
           <div class="icon-bg">
             <span class="iconfont icon-yinpingedan"></span></div>
           <div class="text">歌单</div>
-      </div>
+      </router-link>
       <div class="icon-wrapper">
           <div class="icon-bg">
             <span class="iconfont icon-paihangbang"></span></div>

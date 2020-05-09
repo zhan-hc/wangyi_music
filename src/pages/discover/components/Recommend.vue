@@ -69,9 +69,6 @@ export default {
         axios.get('http://localhost:3000/personalized?limit=6').then(res => res.data).then(data => {
           this.recommendList = data.result
         })
-        // axios.get('http://localhost:3000/top/song?type=7').then(res => res.data).then(data => {
-        //   console.log(data)
-        // })
       })
     }
   },
@@ -115,6 +112,7 @@ export default {
                 display: inline-block
                 width 100px
                 margin-right 3px
+                vertical-align top
                 .content-bg
                     width 90px
                     height 90px

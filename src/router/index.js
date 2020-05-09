@@ -15,6 +15,7 @@ import TelLogin from '../pages/login/components/TelLogin.vue'
 import Rename from '../pages/login/components/Rename.vue'
 import DiscoverDaily from '../pages/discover/components/Daily.vue'
 import SearchResult from '../pages/common/SearchResult.vue'
+import PlayList from '../pages/discover/components/PlayList.vue'
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/searchresult',
       name: 'SearchResult',
       component: SearchResult
+    },
+    {
+      path: '/playlist',
+      name: ' PlayList',
+      component: PlayList
     }
   ]
 })

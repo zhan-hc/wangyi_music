@@ -94,5 +94,8 @@ export default {
   },
   ChangeSearch (state, content) { // 显示历史纪录的的弹出框
     state.search = content
+  },
+  Changerecplay (state, list) { // 显示历史纪录的的弹出框
+    state.recplaylist = list
   }
 }

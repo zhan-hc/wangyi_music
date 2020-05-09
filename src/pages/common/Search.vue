@@ -135,7 +135,6 @@ export default {
       })
     },
     GetSearchSuggest () { // 获取搜索建议
-      // console.log(this.message.length)
       if (this.message === ' ') {
         this.message = this.message.trim()
       }

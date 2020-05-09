@@ -68,6 +68,7 @@ export default {
   currentTime: '', // 当移动进度条时播放器的时间进度
   daily: dailyrec, // 推荐歌单
   search: '', // 历史记录
-  NowList: nowsong
+  NowList: nowsong,
+  recplaylist: []
 
 }

@@ -71,7 +71,6 @@ export default {
     updateSong (id) {
       axios.get('http://localhost:3000/song/detail?ids=' + id).then(res => res.data).then(data => {
         if (data.code === 200) {
-          console.log(data.songs[0])
           this.$store.commit('ChangeSong', data.songs[0])
           this.$store.commit('PlayAudio')
         }

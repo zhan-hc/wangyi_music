@@ -120,7 +120,6 @@ export default {
     GetRecently () {
       let id = this.$store.state.userlist.userId
       axios.get('http://localhost:3000/user/record?uid=' + id + '&type=1').then(res => res.data).then(data => {
-        console.log(data)
         this.songList = data.weekData
         this.recently_num = this.songList.length
       })
