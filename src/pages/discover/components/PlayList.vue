@@ -14,9 +14,9 @@
       <div class="content-wrapper">
         <div class="carousel-wrapper">
           <carousel-3d width="150" height="210" border="0" space="160" perspective="10">
-            <slide class="carousel" v-for="(list,index) in carouseList" :key="index" :index="index">
-              <div class="content">
-                <img :src="list.coverImgUrl">
+            <slide class="carousel" v-for="(list, index) in carList" :key="index" :index="index">
+              <div class="content" @click="playdetail(list.id)">
+                <img v-lazy="list.coverImgUrl">
                 <div class="desc">{{list.copywriter}}</div>
                 <div class="play"><span class="iconfont icon-bofang"></span></div>
                 <div class="num"><span class="iconfont icon-pause"></span>{{NumFilter(list.playCount)}}</div>
@@ -28,7 +28,7 @@
           <div class="item-wrapper" v-for="(page,index) in pages" :key="index">
             <div class="item" v-for="list in page" :key="list.id" @click="playdetail(list.id)">
               <div class="img-wrapper">
-                <img :src="list.coverImgUrl">
+                <img v-lazy="list.coverImgUrl">
               </div>
               <div class="desc">{{list.copywriter}}</div>
               <div class="num"><span class="iconfont icon-pause"></span>{{NumFilter(list.playCount)}}</div>
@@ -68,25 +68,25 @@ export default {
           id: '05',
           name: '轻音乐'
         }
-      ],
-      carList: []
+      ]
+      // carList: []
     }
   },
   mounted () {
     this.init_playlist()
   },
   watch: {
-    playList () {
-      this.$forceUpdate()
+    '$store.state.recplaylist' (newval, oldval) {
+      if (newval !== oldval) {
+        if (newval.length !== 0) {
+          this.$store.commit('ChangeCarousel', this.playList.slice(0, 3))
+        }
+      }
     }
   },
   computed: {
-    carouseList () {
-      let clist = []
-      for (var i = 0; i < 3; i++) {
-        clist.push(this.playList[i])
-      }
-      return clist
+    carList () {
+      return this.$store.state.carousellist
     },
     recomList () {
       let list = JSON.parse(JSON.stringify(this.playList))

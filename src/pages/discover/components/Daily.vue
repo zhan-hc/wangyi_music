@@ -10,7 +10,7 @@
           </div>
       </div>
       <div class="content-wrapper"  ref="songScroll"
-      :style="{'background-image': 'url(' + Randombg +')'}">
+      v-lazy:background-image="Randombg">
         <div class="container">
             <div class="desc-wrapper">
                 <div class="null">
@@ -30,7 +30,7 @@
                         <div @click="updateSong(list.id)"
                          class="songlist" v-for="(list, index) in dailylist" :key="index">
                             <div class="img-wrapper">
-                              <img :src="list.album.picUrl">
+                              <img v-lazy="list.album.picUrl">
                             </div>
                             <div class="content">
                                 <div class="name">{{list.name}}</div>

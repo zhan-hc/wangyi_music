@@ -97,5 +97,8 @@ export default {
   },
   Changerecplay (state, list) { // 显示历史纪录的的弹出框
     state.recplaylist = list
+  },
+  ChangeCarousel (state, list) { // 显示历史纪录的的弹出框
+    state.carousellist = list
   }
 }

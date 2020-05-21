@@ -69,6 +69,19 @@ export default {
   daily: dailyrec, // 推荐歌单
   search: '', // 历史记录
   NowList: nowsong,
-  recplaylist: []
+  recplaylist: [],
+  carousellist: [{
+    'copywriter': 'http://p1.music.126.net/S2-z8dmrkZFZUYBOSMmy9w==/109951163185997584.jpg',
+    'coverImgUrl': '音色可脆如银铃，也可细腻如丝',
+    'playCount': 1855151
+  }, {
+    'copywriter': 'http://p2.music.126.net/NxBuzU7cZW9lbrh6GQOizQ==/19074327718953837.jpg',
+    'coverImgUrl': '青春被时间抛弃，民谣被时光拾起',
+    'playCount': 19233614
+  }, {
+    'copywriter': 'http://p1.music.126.net/NWTxt74aTH4bejNmRb7y4Q==/18765364953000742.jpg',
+    'coverImgUrl': '窝睡在四季与昼夜之间',
+    'playCount': 3023940
+  }]
 
 }

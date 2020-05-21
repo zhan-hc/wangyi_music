@@ -7,8 +7,8 @@
       </div>
       <div class="content-wrapper" ref="ContentScroll">
           <div class="content-container" ref="container">
-            <div class="content" v-for="list in recommendList" :key="list.id">
-                <div class="content-bg"><img :src="list.picUrl"></div>
+            <div class="content" v-for="list in recommendList" :key="list.id" @click="playdetail(list.id)">
+                <div class="content-bg"><img v-lazy="list.picUrl"></div>
                 <div class="content-text">{{list.name}}</div>
                 <div class="content-num"><span class="iconfont icon-pause"> {{NumFilter(list.playCount)}}</span></div>
             </div>
@@ -70,6 +70,10 @@ export default {
           this.recommendList = data.result
         })
       })
+    },
+    playdetail (id) {
+      localStorage.playlist_id = id
+      this.$router.push('/playdetail')
     }
   },
   computed: {

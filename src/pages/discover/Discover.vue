@@ -1,9 +1,9 @@
 <template>
   <div class="discover">
-    <discover-swiper></discover-swiper>
-    <discover-icon></discover-icon>
-    <discover-recommend></discover-recommend>
-    <discover-song></discover-song>
+      <discover-swiper></discover-swiper>
+      <discover-icon></discover-icon>
+      <discover-recommend></discover-recommend>
+      <discover-song></discover-song>
   </div>
 </template>
 

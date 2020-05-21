@@ -2,7 +2,7 @@
 <div class="swiper-container">
     <swiper :options="swiperOption">
         <swiper-slide v-for="(list, index) in swiperList" :key="index">
-            <img class="swiper-img" :src='list.imageUrl'>
+            <img class="swiper-img" v-lazy='list.imageUrl'>
         </swiper-slide>
         <div class="swiper-pagination"  slot="pagination">
         </div>

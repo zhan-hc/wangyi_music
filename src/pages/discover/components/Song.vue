@@ -9,7 +9,7 @@
           <div class="container" ref="container">
               <div class="content-song" :style="{'width': clientWidth + 'px'}" v-for="(page, index) in pages" :key="index">
                   <div class="list" v-for="list in page" :key="list.id">
-                      <div class="list-img"><img :src="list.album.picUrl"></div>
+                      <div class="list-img"><img v-lazy="list.album.picUrl"></div>
                       <div class="name" :class="{lineheight: haveDesc(list.alias[0])}"
                       :style="{'width': clientWidth * 0.6 + 'px'}">{{list.name}}<span class="author">  ─ &nbsp;{{GetAlAr(list.artists)}}</span></div>
                       <div class="desc"><span class="iconfont"></span>{{list.alias[0]}}</div>

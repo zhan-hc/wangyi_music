@@ -17,7 +17,7 @@
                 </div>
                 <div class="content" ref="Main">
                     <div class="img-wrapper" >
-                        <div class="container" :style="{'background-image':'url(' + playlist.coverImgUrl + ')'}">
+                        <div class="container" v-lazy:background-image="playlist.coverImgUrl">
                             <div class="num"><span class="iconfont icon-pause">{{NumFilter(playlist.playCount)}}</span></div>
                             <div class="icon">
                                 <!-- <span class="iconfont icon-xinaixin"></span> -->

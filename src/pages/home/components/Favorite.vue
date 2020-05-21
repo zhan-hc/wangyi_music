@@ -10,7 +10,7 @@
               <span class="iconfont icon-threepoint"></span>
           </div>
       </div>
-      <div class="content-wrapper"  ref="songScroll">
+      <div class="content-wrapper"  ref="WrapperScroll">
         <div class="container">
             <div class="desc-wrapper">
                 <div class="null">
@@ -101,7 +101,7 @@ export default {
     _initScroll () {
       this.$nextTick(() => {
         if (!this.songScroll) {
-          this.songScroll = new BScroll(this.$refs.songScroll, {
+          this.songScroll = new BScroll(this.$refs.WrapperScroll, {
             click: true,
             probeType: 3,
             bounce: false
@@ -127,6 +127,7 @@ export default {
       this.$nextTick(() => {
         axios.get('http://localhost:3000/playlist/detail?id=' + this.playlist.id).then(res => res.data).then(data => {
           this.likelist = data.playlist.tracks
+          console.log(data.playlist.tracks)
           this.$store.commit('ChangeNext', this.likelist)
         })
       })
@@ -149,6 +150,7 @@ export default {
       return this.$store.state.userlist
     },
     playlist () {
+      console.log(this.$store.state.playlist[0])
       return this.$store.state.playlist[0]
     }
   }

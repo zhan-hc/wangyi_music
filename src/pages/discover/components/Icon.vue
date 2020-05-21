@@ -10,11 +10,11 @@
             <span class="iconfont icon-yinpingedan"></span></div>
           <div class="text">歌单</div>
       </router-link>
-      <div class="icon-wrapper">
+      <router-link to="/toplist" tag="div" class="icon-wrapper">
           <div class="icon-bg">
             <span class="iconfont icon-paihangbang"></span></div>
           <div class="text">排行榜</div>
-      </div>
+      </router-link>
       <div class="icon-wrapper">
           <div class="icon-bg">
             <span class="iconfont icon-diantai"></span></div>

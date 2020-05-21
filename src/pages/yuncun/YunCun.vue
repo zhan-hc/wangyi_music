@@ -22,13 +22,13 @@
       <div class="main">
         <div class="list" v-for="list in yunList" :key="list.id">
           <div class="img-wrapper">
-            <img :src="list.picUrl" alt="">
+            <img v-lazy="list.picUrl" alt="">
           </div>
           <div class="content" >
             <div class="desc">{{list.dj.signature}}</div>
             <div class="info">
               <div class="avator">
-                <img :src="list.dj.avatarUrl" alt="">
+                <img v-lazy="list.dj.avatarUrl" alt="">
               </div>
               <div class="name">{{list.dj.nickname}}</div>
               <div class="like">{{NumFilter(list.subCount)}}</div>
@@ -172,11 +172,11 @@ export default {
         box-shadow 5px 5px 5px #888888
         .img-wrapper
           position relative
-          // width 100%
+          height 0
+          padding-bottom 100%
           img
             border-radius 10px 10px 0 0
             width 100%
-            height 250px
         .content
           position relative
           .desc

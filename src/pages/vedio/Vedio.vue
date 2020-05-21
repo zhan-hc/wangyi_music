@@ -11,13 +11,13 @@
           <span class="iconfont icon-bofang"></span>
         </div>
         <div class="vedio">
-          <img :src="list.cover" alt="">
+          <img v-lazy="list.cover">
           <div class="playnum"><span class="iconfont icon-pause"></span>{{NumFilter(list.playCount)}}</div>
         </div>
         <div class="desc">{{list.name}}</div>
         <div class="info">
           <div class="avator">
-            <img :src="list.cover" alt="">
+            <img v-lazy="list.cover">
           </div>
           <div class="name">{{list.artistName}}</div>
           <div class="icon">
@@ -117,7 +117,6 @@ export default {
       this.$nextTick(() => {
         axios.get('http://localhost:3000/mv/all?area=%E5%86%85%E5%9C%B0').then(res => res.data).then(data => {
           if (data.code === 200) {
-            console.log(data)
             this.vedioList = data.data
           }
         }).catch((error) => {
@@ -201,11 +200,11 @@ export default {
       .vedio
         position relative
         width 100%
-        height 150px
+        height 0
+        padding-bottom 55%
         img
           border-radius 5px
           width 100%
-          height 100%
         .playnum
           position absolute
           bottom 5px
