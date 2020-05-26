@@ -10,8 +10,7 @@
 -------
 ## 主页效果图
 
-<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG" width = "200" height = "300" alt=""/>
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG)
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG" width = "300" height = "450" alt=""/>
 
 ## 云村效果图
 
