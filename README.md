@@ -14,28 +14,20 @@
 
 云村效果图
 
+![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_yuncun.JPG)
+
+视频效果图
+
 ![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_video.JPG)
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+播放器效果图
 
-# build for production with minification
-npm run build
+![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_play.JPG)
+![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_lyric.JPG)
 
-# build for production and view the bundle analyzer report
-npm run build --report
+搜索效果图
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
+![Image text](https://github.com/zhan-hc/images/blob/master/img/search.JPG)
+![Image text](https://github.com/zhan-hc/images/blob/master/img/search_result.JPG)
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
