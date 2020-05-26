@@ -30,4 +30,5 @@
 <img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_search.JPG" width = "300" height = "450" alt=""/>
 <img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_search_result.JPG" width = "300" height = "450" alt=""/>
 
+### 实现了大部分的功能，后续还在完善。喜欢的小伙伴可以给⭐⭐
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
