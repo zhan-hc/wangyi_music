@@ -11,24 +11,23 @@
 ## 主页效果图
 
 <img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG" width = "300" height = "450" alt=""/>
-<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_yuncun.JPG" width = "300" height = "450" alt=""/>
 
 ## 云村效果图
 
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_yuncun.JPG)
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_yuncun.JPG" width = "300" height = "450" alt=""/>
 
 ## 视频效果图
 
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_video.JPG)
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_video.JPG" width = "300" height = "450" alt=""/>
 
 ## 播放器效果图
 
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_play.JPG)
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_lyric.JPG)
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_play.JPG" width = "300" height = "450" alt=""/>
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_lyric.JPG" width = "300" height = "450" alt=""/>
 
 ## 搜索效果图
 
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_search.JPG)
-![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_search_result.JPG)
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_search.JPG" width = "300" height = "450" alt=""/>
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_search_result.JPG" width = "300" height = "450" alt=""/>
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
