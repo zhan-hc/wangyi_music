@@ -9,7 +9,12 @@
 
 -------
 主页效果图
+
 ![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG)
+
+云村效果图
+
+![Image text](https://github.com/zhan-hc/images/blob/master/img/wangyi_video.JPG)
 ``` bash
 # install dependencies
 npm install
