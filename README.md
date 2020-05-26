@@ -4,6 +4,9 @@
 
 ## Build Setup
 
+基于 Vue(2.6) + vuex + vue-router + vue-axios +better-scroll + vue-lazyload + ES6 等开发一款安卓版的网易云音乐、flex 布局适配常见移动端。
+调用了NeteaseCloudMusicApi接口的数据。
+
 ``` bash
 # install dependencies
 npm install
