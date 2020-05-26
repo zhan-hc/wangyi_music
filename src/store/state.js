@@ -5,7 +5,7 @@ try {
     defaultSong = JSON.parse(localStorage.SongList)
   }
 } catch (e) {}
-let nowsong = [] // 播放器中音乐
+let nowsong = [] // 播放器中音乐列表
 try {
   if (localStorage.NowList) {
     nowsong = JSON.parse(localStorage.NowList)

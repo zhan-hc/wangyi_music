@@ -143,10 +143,10 @@ export default {
         })
       })
     },
-    back () {
+    back () { // 返回跳转
       this.$router.go(-1)
     },
-    NumFilter (num) {
+    NumFilter (num) { // 过滤播放量
       var shu = ''
       var unit = num
       var wan = num / 10000
@@ -162,7 +162,7 @@ export default {
       }
       return shu
     },
-    GetAlAr (listar, listal) {
+    GetAlAr (listar, listal) { // 获取作曲者
       var detail = ''
       listar.forEach((item, index) => {
         if (index === listar.length - 1) {
@@ -248,6 +248,7 @@ export default {
                     background #fff
                 .content
                     position relative
+                    // height 30p
                     display flex
                     margin-top 20px
                     padding 0 15px 20px 15px
@@ -326,6 +327,8 @@ export default {
                     display flex
                     text-align center
                     color #ffffff
+                    // height 100px
+                    border 2px solid red
                     .icon
                         flex 1
                         .iconfont
@@ -378,8 +381,10 @@ export default {
                                 min-width 0
                                 line-height 20px
                                 padding 5px
+                                margin-right 15px
                                 .name
                                     font-size 14px
+                                    ellipsis()
                                 .author
                                     width 90%
                                     font-size 12px

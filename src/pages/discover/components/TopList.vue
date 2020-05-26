@@ -9,7 +9,7 @@
               <div class="title">云音乐特色榜</div>
               <div class="list" v-for="list in toplist.slice(0,4)" :key="list.id">
                   <div class="list-img">
-                      <img :src="list.coverImgUrl" alt="">
+                      <img :src="list.coverImgUrl">
                   </div>
                   <ul class="item">
                       <li class="item-li" v-for="(item, index) in list.tracks" :key="index">
@@ -48,7 +48,6 @@ export default {
       this.$nextTick(() => {
         axios.get('http://localhost:3000/toplist/detail').then(res => res.data).then(data => {
           if (data.code === 200) {
-            console.log(data)
             this.toplist = data.list
           }
         }).catch((error) => {
@@ -64,7 +63,6 @@ export default {
 @import '~styles/mixins.styl'
 .wrapper
     position relative
-    // background #fff
     .header-wrapper
         position fixed
         top 0

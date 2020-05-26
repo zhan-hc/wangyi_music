@@ -52,7 +52,7 @@
   </div>
   <div class="setting-wrapper">
     <div class="night"><span class="iconfont icon-yejianmoshi"></span>夜间模式</div>
-    <div class="setting"><span class="iconfont icon-shezhi"></span>设置</div>
+    <div class="setting" @click="Setdetail"><span class="iconfont icon-shezhi"></span>设置</div>
     <div class="exit"><span class="iconfont icon-tuichu"></span>退出</div>
   </div>
 </div>
@@ -180,8 +180,14 @@ export default {
         }
       })
     },
-    HideCategory () { // 点击空白区域
+    HideCategory () { // 点击空白区域隐藏
       this.$store.commit('hideCategory')
+    },
+    Setdetail () { // 跳转到设置详情页
+      this.$store.commit('hideCategory')
+      this.$router.push({
+        path: '/setup'
+      })
     }
   }
 }
@@ -201,7 +207,7 @@ export default {
     left 0
     width 100%
     height 100%
-    z-index 100
+    z-index 107
     background rgba(0,0,0,0.5)
     .category
         display flex

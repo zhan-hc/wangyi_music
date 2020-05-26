@@ -164,6 +164,8 @@ export default {
 
 .favorite-wrapper
     position fixed
+    display flex
+    flex-flow column
     top 0
     left 0
     width 100%
@@ -201,8 +203,8 @@ export default {
                 margin-left 20px
     .content-wrapper
         position relative
+        flex 1
         overflow hidden
-        height 700px
         .container
             position relative
             .desc-wrapper
@@ -290,7 +292,6 @@ export default {
                 padding 15px
                 background #fff
                 border-radius 15px
-                margin-bottom 100px
                 .container
                     position relative
                     width 100%
@@ -308,7 +309,7 @@ export default {
                     .song-wrapper
                         position relative
                         margin-top 10px
-                        margin-bottom 70px
+                        margin-bottom 50px
                         .songlist
                             position relative
                             margin-top 5px

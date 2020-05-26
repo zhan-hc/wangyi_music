@@ -7,6 +7,11 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import store from './store'
 import 'swiper/dist/css/swiper.css'
 import VueLazyLoad from 'vue-lazyload'
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
+
 Vue.use(VueLazyLoad, {
   preLoad: 1.3,
   error: 'assets/images/Error.png',

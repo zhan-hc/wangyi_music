@@ -111,6 +111,11 @@ export default new Router({
       path: '/toplist',
       name: 'toplist',
       component: resolve => require(['pages/discover/components/TopList.vue'], resolve)
+    },
+    {
+      path: '/setup',
+      name: 'setup',
+      component: resolve => require(['pages/category/components/Setup.vue'], resolve)
     }
   ]
 })

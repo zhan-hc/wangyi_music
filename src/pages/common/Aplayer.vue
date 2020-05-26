@@ -116,8 +116,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped >
+@import '~styles/mixins.styl'
 .aplayer
     position fixed
+    display flex
     bottom 0px
     left 0px
     z-index 106
@@ -127,34 +129,39 @@ export default {
     border-top 1px solid #ccc
     .aplayer-img
       position relative
+      flex 0 0 40px
       width 40px
-      height 40px
       padding 5px
+      margin-right 5px
       img
         width 100%
         border-radius 50%
     .content
-      position absolute
-      left 55px
-      bottom 10px
+      position relative
+      flex 1
       letter-spacing 1px
+      min-width 0
       .title
+        margin-top 10px
         font-size 12px
+        ellipsis()
       .author
         font-size 10px
         color #999
     .play
-      position absolute
-      right 50px
-      bottom 8px
+      position relative
+      padding 5px
+      line-height 40px
+      margin-right 10px
       .icon-zanting1
         font-size 32px
       .icon-bofang2
         font-size 32px
     .about
-      position absolute
-      right 10px
-      bottom 13px
+      position relative
+      line-height 40px
+      padding 5px
+      margin-right 10px
       .icon-caidan
         font-size 24px
 </style>

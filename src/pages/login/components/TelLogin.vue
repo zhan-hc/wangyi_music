@@ -35,7 +35,7 @@ export default {
         if (data.code === 200) {
           var id = data.account.id
           axios.get('http://localhost:3000/user/detail?uid=' + id).then(res => res.data).then(data => {
-            console.log(data)
+            // console.log(data)
             this.$store.commit('ChangeUserList', data.profile)
             this.$store.commit('ChangeUserLevel', data.level)
           })
@@ -43,7 +43,7 @@ export default {
             this.$store.commit('ChangeDaily', data.recommend)
           })
           axios.get('http://localhost:3000/user/playlist?uid=' + id).then(res => res.data).then(data => {
-            console.log(data)
+            // console.log(data)
             this.$store.commit('ChangePlayList', data.playlist)
             this.$router.push({
               path: '/home'

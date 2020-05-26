@@ -59,7 +59,7 @@ export default {
       localStorage.daily = JSON.stringify(data)
     } catch (e) {}
   },
-  AddHistory (state, text) {
+  AddHistory (state, text) { // 添加历史记录
     state.history.push(text)
     try {
       localStorage.history = JSON.stringify(state.history)
