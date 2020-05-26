@@ -11,6 +11,7 @@
 ## 主页效果图
 
 <img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_home.JPG" width = "300" height = "450" alt=""/>
+<img src="https://github.com/zhan-hc/images/blob/master/img/wangyi_yuncun.JPG" width = "300" height = "450" alt=""/>
 
 ## 云村效果图
 
